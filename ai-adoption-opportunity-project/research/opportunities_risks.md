@@ -1,7 +1,7 @@
 # Opportunities, Risks & Hype Mapping
 
 **Project:** AI Adoption Opportunity — Document Intelligence
-**Client:** Olaf Müller, Hamburg-based logistics and transportation company (500 employees, 16 locations, 8 countries)
+**Client:** CEO Olaf Müller, Hamburg-based logistics and transportation company (500 employees, 16 locations, 8 countries)
 **Prepared:** June 2026
 
 ---
@@ -76,9 +76,9 @@ and reduce empty kilometres.
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Poor data quality in existing documents | Medium | High | Start with one corridor; validate extraction accuracy before scaling |
-| Legacy TMS integration complexity | Medium | Medium | Confirm API/export capability before vendor selection; budget 30–40% of project cost for integration |
+| Legacy TMS integration complexity | Medium | Medium | Confirm API/export capability early in the assessment phase; budget 30–40% of project cost for integration |
 | AI model misreads degraded scans (fax, low-res photos) | Low–Medium | Medium | CSG model proven on handwritten and low-resolution documents; test on sample of Müller's actual document formats |
-| Vendor accuracy SLA below operational requirement | Low | High | Negotiate minimum accuracy guarantees (target 95%+) with financial penalty clauses in contract |
+| Solution accuracy below operational requirement | Low | High | Define minimum accuracy requirements (target 95%+) as a measurable acceptance criterion before solution sign-off |
 | Model errors propagate at scale before detection | Low | High | Implement confidence scoring with human review threshold; monitor error rate weekly in first 3 months |
 
 ### 3.2 Legal & Compliance Risks
@@ -86,8 +86,8 @@ and reduce empty kilometres.
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Wrong HS code submitted without human review | Low | High | Mandatory declarant sign-off before any submission — non-negotiable operating procedure |
-| GDPR breach via vendor processing personal data without DPA | Medium | High | Data Processing Agreement mandatory before go-live |
-| Data residency violation (vendor servers outside EU) | Medium | Medium | Confirm server location before contract signing; require Standard Contractual Clauses for non-EU processing |
+| GDPR breach via processing personal data without documented data agreements | Medium | High | Data Processing Agreement (or equivalent data handling documentation) mandatory before go-live |
+| Data residency violation (vendor servers outside EU) | Medium | Medium | Confirm data hosting location during solution design; apply Standard Contractual Clauses if any processing occurs outside the EU |
 | AI Act reclassification if system used for employee profiling | Low | Medium | Documented policy: system used for document processing only, never for staff performance scoring |
 | African corridor data protection non-compliance (POPIA, Ghana DPA) | Medium | Medium | Legal review of cross-border data flows for South Africa and Ghana corridors specifically |
 
@@ -97,7 +97,7 @@ and reduce empty kilometres.
 |---|---|---|---|
 | Staff resistance to AI workflow change | Medium | Medium | CSG model: frame as removing burden of repetitive entry, not replacing expertise |
 | Over-reliance on AI without human review | Medium | High | Traffic light confidence system (red = must review, orange = should review, green = auto-approved) |
-| Vendor lock-in if proprietary formats used | Low | Medium | Require data portability and export in standard formats (JSON, CSV) in contract |
+| Architecture lock-in if proprietary or non-portable formats are used | Low | Medium | Design for data portability from the outset; ensure all outputs are in standard formats (JSON, CSV) and documented for future maintainability |
 | Cybersecurity incident targeting document data | Low–Medium | High | Ensure NIS2 compliance; AI system covered by existing cybersecurity policy |
 | Pilot results not replicating at scale | Medium | Medium | Staged rollout — one corridor first, measure, then expand |
 
@@ -107,7 +107,7 @@ and reduce empty kilometres.
 |---|---|---|---|
 | Implementation cost overrun | Medium | Medium | Gartner: 62% of AI initiatives exceed budget by 45%; build 30% contingency into plan |
 | ROI slower than 60–90 day benchmark | Medium | Low | Benchmark applies to invoice processing; customs declaration automation may take longer — model conservatively at 6 months |
-| Vendor pricing model change after adoption | Low | Medium | Multi-year contract with price lock; ensure competitor alternatives exist before signing |
+| Cost model change or scope creep after solution delivery | Low | Medium | Define scope and pricing structure clearly before build commences; include change control procedures in the engagement agreement |
 
 ---
 

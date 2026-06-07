@@ -1,7 +1,7 @@
 # Market Research: AI Adoption in Logistics & Freight Forwarding
 
 **Project:** AI Adoption Opportunity — Document Intelligence
-**Client:** Olaf Müller, Hamburg-based logistics and transportation company (500 employees, 16 locations, 8 countries)
+**Client:** CEO Olaf Müller, Hamburg-based logistics and transportation company (500 employees, 16 locations, 8 countries)
 
 
 ---
@@ -56,6 +56,20 @@ https://docshipper.com/logistics/ai-changing-logistics-supply-chain-2025/)*
 using generative AI — specifically in forecasting, capacity planning, and pricing optimisation.
 *(Source: Accenture study via Maersk, December 2024 —
 https://www.maersk.com/insights/digitalisation/2024/12/18/what-to-expect-in-2025-supply-chain-tech-trends)*
+
+### 2.4 Company-specific adoption signals — Müller's company
+
+While industry-wide adoption rates establish the broader context, the following operational characteristics of Müller's company are themselves classic indicators of AI readiness and fit — independently of the industry trend. Each signal maps directly to a condition where Document Intelligence delivers measurable value.
+
+| Signal | Present | Why it matters for AI adoption |
+|---|---|---|
+| Existing TMS usage | ✓ | Confirms data infrastructure and operational discipline; Document Intelligence integrates as an additional layer, not a replacement |
+| International operations (multi-country, multi-customs regime) | ✓ | 8 countries × multiple customs regimes = high daily document volume and regulatory complexity — the core conditions for automation ROI |
+| E-commerce customers | ✓ | E-commerce logistics generates high-frequency, standardised document flows — well-suited to AI extraction and pre-population |
+| Contract logistics | ✓ | Long-term client agreements require consistent, auditable documentation — AI-generated records directly support compliance and client reporting obligations |
+| Hazardous goods logistics | ✓ | Hazmat shipments require precise, error-free documentation across multiple regulatory frameworks — the cost of a documentation error is disproportionately high, making accuracy automation especially valuable |
+
+**Reading the signals:** All five indicators are present. This is not a company that needs to build readiness for AI — the operational environment that makes Document Intelligence valuable already exists. The question is not whether to adopt, but where to start.
 
 ---
 

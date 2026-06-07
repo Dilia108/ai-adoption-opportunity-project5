@@ -35,9 +35,92 @@ means the company faces daily exposure to:
 - Thin margins (typical 3PL net margins: 4–7%) where operational inefficiency is directly visible
 - Energy and industrial clients with zero tolerance for customs delays or compliance errors
 
+### AI adoption signals
+The following operational characteristics are classic indicators of readiness and fit for AI adoption in logistics:
+
+| Signal | Present |
+|---|---|
+| Existing TMS usage | ✓ |
+| International operations (multi-country, multi-customs regime) | ✓ |
+| E-commerce customers | ✓ |
+| Contract logistics | ✓ |
+| Hazardous goods logistics | ✓ |
+
+These signals confirm that the company operates in an environment where AI delivers measurable value — high document volume, regulatory complexity, and margin sensitivity are precisely the conditions where automation has the greatest impact.
+
+### AI capability baseline — publicly evidenced
+Based on publicly available information, the following assessment maps current confirmed capabilities against the AI capability landscape relevant to a 3PL of this profile:
+
+| Capability | Status |
+|---|---|
+| TMS / WMS / BI Integration | ✓ Confirmed |
+| End-to-end Visibility | ✓ Confirmed |
+| KPI Analytics | ✓ Confirmed |
+| Predictive ETA | Limited public evidence |
+| AI Route Optimisation | Limited public evidence |
+| Computer Vision Warehousing | No public evidence |
+| Predictive Disruption Alerts | No public evidence |
+| AI-powered Exception Handling | No public evidence |
+| GenAI Customer Service | No public evidence |
+| AI Carrier Collaboration Platform | No public evidence |
+| Autonomous Decision Support | No public evidence |
+
+**Reading the baseline:** The confirmed capabilities — TMS/WMS/BI integration, end-to-end visibility, and KPI analytics — demonstrate that the company has the data infrastructure and operational discipline that AI adoption requires. The gaps are not weaknesses; they are the opportunity map. Document Intelligence sits precisely at the intersection of confirmed readiness (TMS integration, visibility data) and the most accessible gap (no AI-assisted document processing evidenced), making it the strongest and lowest-risk entry point.
+
 ---
 
-## 2. Market Signals — AI Adoption in Logistics & Freight Forwarding
+## 2. Stakeholder Needs & Decision Constraints
+
+### 2.1 Primary decision-maker
+
+**Olaf Müller — CEO**
+Olaf Müller is the sole decision-maker for this initiative. The presentation is a one-to-one engagement, which means the proposal must work at CEO level: strategic framing first, financial case second, operational detail available but not leading.
+
+| Dimension | Assessment |
+|---|---|
+| Role | CEO and principal — final authority on adoption decision |
+| Primary need | Confidence that AI delivers measurable business value without operational disruption or compliance exposure |
+| Strategic lens | Competitive positioning: what does adopting this do for the company's standing with multinational energy and industrial clients? |
+| Financial lens | ROI speed and margin impact — at 4–7% net margins, any initiative must show clear, fast return |
+| Risk lens | Reputational and compliance risk — a customs error affecting an energy client's shipment is a relationship risk, not just a financial one |
+| Likely concern | "Is this proven at a company our size, or are we a test case?" |
+| Likely concern | "What happens if it goes wrong mid-shipment?" |
+| What will move him | Documented precedent from a structurally similar operator + a clear, staged rollout that limits downside |
+
+*Flag for review: decision-making style, personal risk appetite, and any prior AI experience (positive or negative) not yet confirmed — validate before presentation.*
+
+---
+
+### 2.2 Secondary stakeholders — not in the room, but relevant
+
+While the presentation is one-to-one, Olaf Müller will internally consult or delegate to the following roles before or after the decision. Understanding their concerns shapes how the CEO will probe during the meeting.
+
+| Role | Their primary concern | How to address it through the CEO |
+|---|---|---|
+| Head of Customs / Operations | "Will this create more work for my team during rollout?" | Frame as burden removal — repetitive data entry eliminated, not expertise replaced |
+| IT / Systems lead | "Can this integrate with our TMS without a major project?" | Confirm API/export capability assessment as a defined early step; integration cost budgeted explicitly |
+| Finance / CFO function | "What is the actual cost and what is the actual return?" | Use conservative 6-month ROI model, not 60–90 day headline; present cost range with 30% contingency built in |
+| Customs declarants (operational staff) | "Is this replacing my job?" | Traffic light confidence system keeps human sign-off mandatory — legally and operationally non-negotiable |
+| Legal / Compliance | "Are we exposed under GDPR, EU AI Act, or African data protection law?" | DPA, data residency, and POPIA requirements are already mapped and built into the implementation plan |
+
+*Flag for review: confirm whether a CFO or Operations Director exists as a formal role, and whether Müller typically consults internally before committing to external engagements.*
+
+---
+
+### 2.3 Decision constraints
+
+| Constraint | Status | Approach |
+|---|---|---|
+| Budget | Not confirmed — treat as unknown | Present cost as a range (low–medium); lead with ROI and payback speed before cost; avoid anchoring with a single figure |
+| Timeline | Not confirmed — treat as unknown | The 60–90 day payback case creates its own urgency; frame the question as cost of delay, not pressure to decide |
+| Internal capacity for a parallel project | Unknown | Staged rollout (one corridor first) is designed to minimise internal burden; position this explicitly |
+| Risk appetite | Unknown — infer as moderate-conservative given energy/industrial client base | Lead with the "additive, not disruptive" implementation model and the mandatory human review layer |
+| Existing system dependencies | TMS confirmed; integration complexity unknown | Flag API/export assessment as a defined first step — not an assumption |
+| Prior AI experience | Unknown | Do not assume familiarity; frame AI concepts in operational outcomes, not technical language |
+
+---
+
+## 3. Market Signals — AI Adoption in Logistics & Freight Forwarding
 
 ### 2.1 Industry size and growth
 The global freight forwarding market is valued at **USD 178 billion in 2025** and projected to
@@ -127,7 +210,7 @@ https://2024-annual-report.kuehne-nagel.com/corporate-brochure/english/interview
 
 ---
 
-## 3. AI Opportunity Assessment — Two Candidates
+## 4. AI Opportunity Assessment — Two Candidates
 
 Two AI opportunities were evaluated for Müller's company. Both are technically feasible and financially material. The question is which one to pursue first.
 
@@ -227,7 +310,7 @@ quality that Demand Forecasting requires. The two opportunities are sequential, 
 
 ---
 
-## 4. Use Case Selected
+## 5. Use Case Selected
 
 **AI-Powered Document Intelligence for Customs & Invoice Processing**
 
@@ -237,7 +320,7 @@ Optical Character Recognition (OCR), Natural Language Processing (NLP), and mach
 
 ---
 
-## 5. Problem Statement
+## 6. Problem Statement
 
 Every international shipment Müller's company handles requires a set of trade documents:
 
@@ -258,7 +341,7 @@ https://docstreams.ai/blog/ai-in-maritime-and-logistics-the-document-processing-
 
 ---
 
-## 6. How would the AI Solution Work
+## 7. How would the AI Solution Work
 
 The process follows four stages, based on the model deployed by Customs Support Group across
 14 European markets in 2025:
@@ -295,7 +378,7 @@ Corrected documents feed back to the model — it learns from each correction an
 
 ---
 
-## 7. Real-World Precedent — Customs Support Group
+## 8. Real-World Precedent — Customs Support Group
 
 The closest structural benchmark to Müller's company is Customs Support Group (CSG) —
 a multi-country European customs and trade solutions provider.
@@ -320,7 +403,7 @@ CSG AI detail, March 2026 — https://www.customssupport.com/artificial-intellig
 
 ---
 
-## 8. Justification — Why This Use Case
+## 9. Justification — Why This Use Case
 
 ### 8.1 Speed of return
 Document Intelligence delivers ROI in **60–90 days** — faster than any other AI use case in
@@ -354,23 +437,6 @@ https://thinking.inc/en/industry-service/logistics-ai-roi/)*
 
 ---
 
-## 9. Vendor Landscape
-
-The following platforms are active in this space and relevant to Müller's use case.
-Selection criteria: multi-language support, EU data residency option, TMS integration capability.
-
-| Vendor | Strength | Relevant for Müller |
-|---|---|---|
-| ABBYY Vantage | 11 pre-trained transport & logistics document models | Strong — purpose-built for logistics docs |
-| FreightMynd | Customs declaration automation, TMS integration | Strong — freight-forwarder focused |
-| Cargo Docket | AI customs data extraction and validation | Strong — freight forwarder focus |
-| Docsumo | Invoice and document extraction, logistics pre-trained models | Strong — invoice processing |
-| KlearNow.AI | Customs brokerage automation, 85%+ manual error reduction | Strong — customs-specific |
-
-*(Note: vendor selection requires separate RFP process. This list is illustrative, not exhaustive.)*
-
----
-
 ## 10. Success Metrics
 
 | Metric | Baseline (before AI) | Target (after 90 days) | Stretch (after 12 months) |
@@ -389,9 +455,9 @@ Selection criteria: multi-language support, EU data residency option, TMS integr
 | Area | Classification | Key requirement |
 |---|---|---|
 | EU AI Act | Minimal risk | No conformity assessment required; maintain human oversight; AI literacy training for staff |
-| GDPR | Data controller (Müller) + processor (AI vendor) | DPA mandatory before go-live; data minimisation; retention per HGB (10yr) and UCC (3yr) |
+| GDPR | Data controller (Müller) + processor (solution provider / data processor) | DPA mandatory before go-live; data minimisation; retention per HGB (10yr) and UCC (3yr) |
 | EU Union Customs Code | Legal declarant remains human | AI pre-populates; licensed declarant signs and submits |
-| South Africa POPIA | Applies to SA corridor data | Lawful basis required; cross-border transfer clauses in vendor contract |
+| South Africa POPIA | Applies to SA corridor data | Lawful basis required; cross-border transfer clauses in the solution provider agreement |
 | German HGB §257 | 10-year retention | Commercial invoices and correspondence — configure in AI system from day one |
 | NIS2 | Logistics operator may qualify as important entity | AI system must be covered by cybersecurity policy; 24-hour incident reporting |
 
