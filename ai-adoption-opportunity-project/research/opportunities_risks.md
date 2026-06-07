@@ -51,21 +51,48 @@ and reduce empty kilometres.
 - 20–50% forecast error reduction (McKinsey 2025)
 - 15% reduction in empty kilometres (Journal of Business & Entrepreneurial Studies 2025)
 
+### 1.3 Tertiary Opportunity — Predictive ETA & AI Route Optimisation
+
+**Definition:** AI analyses historical shipment data, carrier performance, weather, port congestion,
+and customs clearance times to generate predictive ETAs and recommend optimal routing decisions
+in real time.
+
+**Why it is the third move, not the first or second:**
+- Limited public evidence of current capability at Müller's company — Predictive ETA and AI Route
+  Optimisation are confirmed gaps in the current capability baseline
+- Depends on clean, structured shipment history — the same data quality requirement as Demand
+  Forecasting, compounded by multi-corridor complexity across 8 countries
+- Highest integration complexity of the three opportunities: requires live feeds from carriers,
+  ports, and customs systems
+- Competitive value is real but timing-dependent — meaningful only once Document Intelligence
+  is generating the clean data foundation
+
+**Financial opportunity when ready:**
+- 15% reduction in empty kilometres (Journal of Business & Entrepreneurial Studies 2025)
+- Carrier cost reduction through optimised load and route selection
+- Client retention benefit: real-time ETA visibility is an increasingly standard expectation
+  among multinational energy and industrial clients
+
+**Note:** This opportunity is flagged as tertiary based on current public evidence. If internal
+data confirms stronger existing capability in route optimisation or ETA prediction, the sequencing
+should be reassessed.
+
 ---
 
 ## 2. Opportunity Comparison
 
-| Factor | Document Intelligence | Demand Forecasting |
-|---|---|---|
-| Data needed | Existing documents (immediate) | 2+ years TMS history |
-| Time to first ROI | 60–90 days | 6–18 months |
-| Implementation cost | Low–medium | Medium–high |
-| Relevance to multi-country ops | Very high (cross-border = customs volume) | High (16 locations) |
-| Risk level | Low (additive to current workflows) | Medium (data quality dependency) |
-| Competitive precedent | Kuehne+Nagel — growing fast | Maersk, DB Schenker |
-| Regulatory upside | High (EU customs automation, CSRD) | Moderate |
-| Legal complexity | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) |
-| Recommended sequence | **First move** | Second move |
+| Factor | Document Intelligence | Demand Forecasting | Predictive ETA & Route Optimisation |
+|---|---|---|---|
+| Data needed | Existing documents (immediate) | 2+ years TMS history | 2+ years shipment & carrier history |
+| Time to first ROI | 60–90 days | 6–18 months | 12–24 months |
+| Implementation cost | Low–medium | Medium–high | High |
+| Relevance to multi-country ops | Very high (cross-border = customs volume) | High (16 locations) | High (multi-corridor routing) |
+| Risk level | Low (additive to current workflows) | Medium (data quality dependency) | Medium–high (integration complexity) |
+| Competitive precedent | Kuehne+Nagel — growing fast | Maersk, DB Schenker | Maersk, DB Schenker |
+| Regulatory upside | High (EU customs automation, CSRD) | Moderate | Low |
+| Legal complexity | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) |
+| Current capability gap | Confirmed — no public evidence | Confirmed — no public evidence | Confirmed — no public evidence |
+| Recommended sequence | **First move** | Second move | Third move |
 
 ---
 
@@ -109,6 +136,16 @@ and reduce empty kilometres.
 | ROI slower than 60–90 day benchmark | Medium | Low | Benchmark applies to invoice processing; customs declaration automation may take longer — model conservatively at 6 months |
 | Cost model change or scope creep after solution delivery | Low | Medium | Define scope and pricing structure clearly before build commences; include change control procedures in the engagement agreement |
 
+### 3.5 Data Risks
+
+| Risk | Likelihood | Impact | Mitigation |
+|---|---|---|---|
+| Document quality too low for reliable AI extraction (degraded scans, fax, handwritten) | Low–Medium | Medium | Test AI extraction on a sample of Müller's actual documents before committing to full rollout; CSG model proven on low-resolution inputs |
+| Inconsistent document formats across 8-country corridor network | Medium | Medium | Start with one corridor (Germany–South Africa) to validate format coverage before scaling to other lanes |
+| Insufficient historical data volume for Demand Forecasting (Opportunity 2) | Medium | High | Audit TMS data quality and completeness per corridor before initiating Opportunity 2; Document Intelligence phase generates the clean data foundation |
+| Data silos between locations preventing consolidated AI training | Medium | Medium | Map data flows across all 16 locations early; confirm TMS data is centralised or consolidatable before Opportunity 2 scoping |
+| African corridor data completeness lower than EU corridors | Medium | Medium | Treat Ghana, Mozambique, and Namibia lanes as separate data quality assessment — do not assume parity with German or French corridor data |
+
 ---
 
 ## 4. Hype Signal Mapping
@@ -134,7 +171,19 @@ Distinguishing what is proven from what is overstated is essential for credible 
 | USD 878,000 annual savings | From one unnamed enterprise organisation; scale to Müller's estimated document volume |
 | 50% overall efficiency improvement | CSG's 2025 target — directionally correct but still a target, not a confirmed outcome |
 
-### Overstated — avoid or explicitly caveat
+### Assumptions Olaf Müller should validate before investing
+
+These are the key unknowns that underpin the business case. None invalidates the recommendation — but each should be confirmed before final commitment to avoid mid-project surprises.
+
+| Assumption | Why it matters | How to validate |
+|---|---|---|
+| Daily document volume is sufficient to justify automation | ROI calculations scale with volume — low volume = longer payback | Request internal count of invoices, customs declarations, and B/Ls processed per month across key corridors |
+| TMS has API or structured export capability | Without integration, document data must be entered manually — defeating the purpose | IT or systems lead confirms API availability and data export formats before solution design begins |
+| Existing documents are digitally accessible (not paper-only) | AI extraction requires digital input; paper-only archives require scanning infrastructure first | Sample audit of document receipt method across the Germany–South Africa corridor |
+| Document formats across corridors are sufficiently standardised | High format variability increases extraction complexity and reduces accuracy | Test extraction on 50–100 representative documents from the pilot corridor before full build |
+| Staff are willing to adopt a new review workflow | Change resistance is a documented cause of AI underperformance | Early conversation with customs operations team; frame as workload reduction, not job change |
+| GDPR and POPIA data flows can be legally structured | Cross-border processing of personal data in logistics documents requires a legal basis | Legal review of data flows for EU–South Africa and EU–Ghana corridors prior to go-live |
+| The 60–90 day payback benchmark applies at Müller's document volume | Benchmark is from invoice processing at unnamed enterprise scale | Model ROI conservatively using Müller's estimated monthly document count; present 6-month scenario as base case |
 
 | Claim | Why to avoid |
 |---|---|

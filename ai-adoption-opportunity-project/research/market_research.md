@@ -93,40 +93,64 @@ https://thinking.inc/en/industry-service/logistics-ai-roi/)*
 
 ## 4. Benchmark Companies
 
-### Maersk
+*Source types are labelled for each entry: [Company Statement], [Annual Report], [Trade Publication], [Case Study], [Press Release], [Company Blog]*
+
+### Maersk — Large enterprise
 - Confirmed "ample proof points" of generative AI in forecasting, capacity planning, and pricing.
   Market adaptation time reduced from months to weeks.
-  *(Source: Maersk SVP statement, December 2024 —
-  https://www.maersk.com/insights/digitalisation/2024/12/18/what-to-expect-in-2025-supply-chain-tech-trends)*
+  *[Company Statement] Maersk SVP, December 2024 —
+  https://www.maersk.com/insights/digitalisation/2024/12/18/what-to-expect-in-2025-supply-chain-tech-trends*
 - AI-driven predictive maintenance reduced vessel downtime by 30%, saving USD 300M+ annually.
-  *(Source: DocShipper 2025 — https://docshipper.com/logistics/ai-changing-logistics-supply-chain-2025/)*
+  *[Trade Publication] DocShipper 2025 — https://docshipper.com/logistics/ai-changing-logistics-supply-chain-2025/*
 - AI warehouse robotics increased inventory pickup by 33% and tripled sorting speed in UK warehouses.
-  *(Source: DisruptionHub — https://disruptionhub.com/how-does-maersk-use-ai/)*
+  *[Trade Publication] DisruptionHub — https://disruptionhub.com/how-does-maersk-use-ai/*
 - Strategic goal: zero-touch logistics within 5–7 years.
 
-### DB Schenker
+### DB Schenker — Large enterprise
 - Built internal "Forecasting Fortune Teller" AI generating ~6,300 forecast series per day.
-  *(Source: DB Schenker Insights blog, August 2025 —
-  https://www.dbschenker.com/global/insights/blog/unveiling-the-forecasting-fortune-teller-1708852)*
+  *[Company Blog] DB Schenker Insights, August 2025 —
+  https://www.dbschenker.com/global/insights/blog/unveiling-the-forecasting-fortune-teller-1708852*
 - Deployed AI-powered network simulation in Bulgaria — tested Black Friday peaks, hub changes,
   route modifications before committing capital.
-  *(Source: Transmetrics.ai / DB Schenker blog —
-  https://www.transmetrics.ai/blog/supply-chain-logistics-technology-trends/)*
+  *[Trade Publication] Transmetrics.ai / DB Schenker blog —
+  https://www.transmetrics.ai/blog/supply-chain-logistics-technology-trends/*
 - Centralised AI platform built on Microsoft Azure — one model adaptable to all country-specific needs.
-  *(Source: DB Schenker Global — https://www.dbschenker.com/global/about/innovation-digitalization/data-analytics-artificial-intelligence)*
+  *[Company Page] DB Schenker Global — https://www.dbschenker.com/global/about/innovation-digitalization/data-analytics-artificial-intelligence*
 
-### Kuehne+Nagel
+### Kuehne+Nagel — Large enterprise
 - Customs division achieved standout growth in 2024 driven by AI-supported customs services.
-  *(Source: Kuehne+Nagel Annual Report 2024 —
-  https://2024-annual-report.kuehne-nagel.com/corporate-brochure/english/interview-with-the-ceo)*
+  *[Annual Report] Kuehne+Nagel 2024 —
+  https://2024-annual-report.kuehne-nagel.com/corporate-brochure/english/interview-with-the-ceo*
 - Deployed AI document recognition on Road Carrier platform — automated POD validation and
   NLP driver feedback analysis across Europe, Africa, and Middle East.
-  *(Source: Kuehne+Nagel Newsroom, October 2024 —
-  https://newsroom.kuehne-nagel.com/kuehnenagel-continues-to-digitise-its-cooperation-with-road-carriers-powered-by-ai/)*
+  *[Press Release] Kuehne+Nagel Newsroom, October 2024 —
+  https://newsroom.kuehne-nagel.com/kuehnenagel-continues-to-digitise-its-cooperation-with-road-carriers-powered-by-ai/*
 - Demand for AI-supported customs services increased noticeably in 2025, contributing to record
   Contract Logistics results.
-  *(Source: Kuehne+Nagel 2025 full-year results —
-  https://newsroom.kuehne-nagel.com/kuehnenagel-reports-solid-earnings-in-2025/)*
+  *[Annual Results Statement] Kuehne+Nagel 2025 —
+  https://newsroom.kuehne-nagel.com/kuehnenagel-reports-solid-earnings-in-2025/*
+
+### Customs Support Group (CSG) — Mid-market structural comparator
+CSG is the closest publicly documented structural benchmark to Müller's company: a multi-country
+customs and trade solutions provider operating across 14 European markets, serving freight forwarders
+of comparable scale and document complexity.
+
+- Deployed AI-powered Customs SmartAssist using OCR, ML, and NLP to process documents in any
+  format or quality — including handwritten notes, fax copies, and mobile phone photos.
+  *[Press Release] CSG, May 2025 —
+  https://www.customssupport.com/customs-support-group-deploys-ai-powered-smart-document-processing-across-europe/*
+- Traffic light confidence scoring system: green (auto-approved), orange (human review), red
+  (manual entry required) — same model recommended for Müller's implementation.
+  *[Company Page] CSG AI detail, March 2026 — https://www.customssupport.com/artificial-intelligence-ai-meets-customs/*
+- Results measured: 99% efficiency improvement for simple repetitive tasks; 36% for complex
+  declarations; 4 million customs declarations processed digitally per year; Italy hit December
+  targets two months early.
+  *[Case Study / Operational Reporting] Intelligent CIO Europe, April 2025 —
+  https://www.intelligentcio.com/eu/2025/04/11/customs-support-group-carries-industry-from-burden-to-business-opportunity-through-ai-innovation/*
+
+**Why CSG matters for Müller:** Unlike Maersk or DB Schenker, CSG operates at a scale and
+document complexity directly comparable to a 500-person, multi-corridor 3PL. Their results are
+the most transferable benchmark in this research.
 
 ---
 
