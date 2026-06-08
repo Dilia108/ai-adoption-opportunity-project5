@@ -34,10 +34,9 @@ and flags uncertain data for human review.
 *(Source: Parseur AI Invoice Processing Benchmarks 2025 —
 https://parseur.com/blog/ai-invoice-processing-benchmarks)*
 
-### 1.2 Secondary Opportunity — Demand Forecasting & Route Optimisation
+### 1.2 Secondary Opportunity — Operational Copilot for Planners
 
-**Definition:** AI trains on historical TMS data to predict future demand, optimise load planning,
-and reduce empty kilometres.
+**Definition:** AI trains on historical TMS data to predict future demand, optimise load planning, and reduce empty kilometres.
 
 **Why it is the second move, not the first:**
 - Requires 2+ years of clean, structured TMS history — data quality risk
@@ -51,15 +50,12 @@ and reduce empty kilometres.
 - 20–50% forecast error reduction (McKinsey 2025)
 - 15% reduction in empty kilometres (Journal of Business & Entrepreneurial Studies 2025)
 
-### 1.3 Tertiary Opportunity — Predictive ETA & AI Route Optimisation
+### 1.3 Tertiary Opportunity — Shipment Visibility & Risk Prediction
 
-**Definition:** AI analyses historical shipment data, carrier performance, weather, port congestion,
-and customs clearance times to generate predictive ETAs and recommend optimal routing decisions
-in real time.
+**Definition:** AI analyses historical shipment data, carrier performance, weather, port congestion, and customs clearance times to generate predictive ETAs and recommend optimal routing decisions in real time.
 
 **Why it is the third move, not the first or second:**
-- Limited public evidence of current capability at Müller's company — Predictive ETA and AI Route
-  Optimisation are confirmed gaps in the current capability baseline
+- Limited public evidence of current capability at Müller's company — shipment visibility and risk prediction are confirmed gaps in the current capability baseline
 - Depends on clean, structured shipment history — the same data quality requirement as Demand
   Forecasting, compounded by multi-corridor complexity across 8 countries
 - Highest integration complexity of the three opportunities: requires live feeds from carriers,
@@ -81,7 +77,7 @@ should be reassessed.
 
 ## 2. Opportunity Comparison
 
-| Factor | Document Intelligence | Demand Forecasting | Predictive ETA & Route Optimisation |
+| Factor | Document Intelligence | Operational Copilot for Planners | Shipment Visibility & Risk Prediction |
 |---|---|---|---|
 | Data needed | Existing documents (immediate) | 2+ years TMS history | 2+ years shipment & carrier history |
 | Time to first ROI | 60–90 days | 6–18 months | 12–24 months |
@@ -142,7 +138,7 @@ should be reassessed.
 |---|---|---|---|
 | Document quality too low for reliable AI extraction (degraded scans, fax, handwritten) | Low–Medium | Medium | Test AI extraction on a sample of Müller's actual documents before committing to full rollout; CSG model proven on low-resolution inputs |
 | Inconsistent document formats across 8-country corridor network | Medium | Medium | Start with one corridor (Germany–South Africa) to validate format coverage before scaling to other lanes |
-| Insufficient historical data volume for Demand Forecasting (Opportunity 2) | Medium | High | Audit TMS data quality and completeness per corridor before initiating Opportunity 2; Document Intelligence phase generates the clean data foundation |
+| Insufficient historical data volume for the Operational Copilot (Opportunity 2) | Medium | High | Audit TMS data quality and completeness per corridor before initiating Opportunity 2; Document Intelligence phase generates the clean data foundation |
 | Data silos between locations preventing consolidated AI training | Medium | Medium | Map data flows across all 16 locations early; confirm TMS data is centralised or consolidatable before Opportunity 2 scoping |
 | African corridor data completeness lower than EU corridors | Medium | Medium | Treat Ghana, Mozambique, and Namibia lanes as separate data quality assessment — do not assume parity with German or French corridor data |
 

@@ -40,7 +40,7 @@ The following operational characteristics are classic indicators of readiness an
 
 | Signal | Present |
 |---|---|
-| Existing TMS usage | ✓ |
+| Existing TMS (Transportation Management System) usage | ✓ |
 | International operations (multi-country, multi-customs regime) | ✓ |
 | E-commerce customers | ✓ |
 | Contract logistics | ✓ |
@@ -210,11 +210,11 @@ https://2024-annual-report.kuehne-nagel.com/corporate-brochure/english/interview
 
 ---
 
-## 4. AI Opportunity Assessment — Two Candidates
+## 4. AI Opportunity Assessment — Three Candidates
 
-Two AI opportunities were evaluated for Müller's company. Both are technically feasible and financially material. The question is which one to pursue first.
+Three AI opportunities were evaluated for Müller's company. All three are technically feasible and financially material. The question is sequencing: which to pursue first, and in what order.
 
-### Opportunity A — AI Demand Forecasting & Route Optimisation
+### Opportunity A — Operational Copilot for Planners
 
 **What it does:** Trains on historical TMS data (shipment volumes, routes, timing, client orders)
 to predict future demand, optimise load planning, and reduce empty kilometres.
@@ -263,25 +263,50 @@ and flags uncertain data for human review before submission.
 
 ---
 
+### Opportunity C — Shipment Visibility & Risk Prediction
+
+**What it does:** Analyses historical shipment data, carrier performance, weather, port congestion,
+and customs clearance times to generate predictive ETAs and flag shipment risk in real time —
+giving planners early warning on delays before they affect clients.
+
+**Evidence of impact:**
+- Real-time visibility and predictive alerting directly reduces client-facing delay incidents
+- Carrier cost reduction through optimised routing decisions based on live risk signals
+- Client retention benefit: real-time ETA visibility is an increasingly standard expectation
+  among multinational energy and industrial clients
+  *(Source: Maersk, DB Schenker operational reporting 2025)*
+
+**Implementation profile:**
+- Requires: 2+ years of clean shipment and carrier history; live feeds from carriers, ports,
+  and customs systems
+- Timeline to ROI: 12–24 months
+- Cost: high
+- Risk: medium–high — highest integration complexity of the three opportunities; meaningful
+  only once Document Intelligence is generating the clean data foundation
+
+---
+
 ### 3.1 Head-to-head comparison
 
-| Factor | Demand Forecasting | Document Intelligence |
-|---|---|---|
-| Data needed | 2+ years TMS history | Existing documents (immediate) |
-| Time to first ROI | 6–18 months | 60–90 days |
-| Implementation cost | Medium–high | Low–medium |
-| Relevance to multi-country ops | High (16 locations) | Very high (cross-border = customs volume) |
-| Risk level | Medium (data quality) | Low (additive to current workflows) |
-| Competitive precedent | Maersk, DB Schenker | Kuehne+Nagel — growing fast |
-| Regulatory upside | Moderate | High (EU customs automation, CSRD) |
-| Legal complexity | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) |
+| Factor | Document Intelligence | Operational Copilot for Planners | Shipment Visibility & Risk Prediction |
+|---|---|---|---|
+| Data needed | Existing documents (immediate) | 2+ years TMS history | 2+ years shipment & carrier history |
+| Time to first ROI | 60–90 days | 6–18 months | 12–24 months |
+| Implementation cost | Low–medium | Medium–high | High |
+| Relevance to multi-country ops | Very high (cross-border = customs volume) | High (16 locations) | High (multi-corridor routing) |
+| Risk level | Low (additive to current workflows) | Medium (data quality) | Medium–high (integration complexity) |
+| Competitive precedent | Kuehne+Nagel — growing fast | Maersk, DB Schenker | Maersk, DB Schenker |
+| Regulatory upside | High (EU customs automation, CSRD) | Moderate | Low |
+| Legal complexity | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) | Minimal risk (EU AI Act) |
+| Recommended sequence | **First move** | Second move | Third move |
 
 ### 3.2 Verdict — why Document Intelligence is the stronger first move
 
 **1. No data dependency.**
-Demand forecasting requires years of clean TMS history. Müller's data quality across 16 locations
-in 8 countries — including African corridors where data infrastructure varies — cannot be assumed
-to be clean and complete. Document Intelligence starts with documents that already exist today.
+The Operational Copilot and Shipment Visibility opportunities both require years of clean,
+structured TMS and shipment history. Müller's data quality across 16 locations in 8 countries —
+including African corridors where data infrastructure varies — cannot be assumed to be clean and
+complete. Document Intelligence starts with documents that already exist today.
 
 **2. Fastest payback in logistics AI.**
 60–90 days to ROI is the fastest documented payback of any AI use case in this sector. At 4–7%
@@ -301,12 +326,14 @@ similar operator.
 **5. Regulatory tailwind, not headwind.**
 The EU Customs Reform and the new EU Customs Data Hub actively reward operators with clean,
 auditable customs records. Document Intelligence builds exactly that track record — creating
-a regulatory advantage that Demand Forecasting does not.
+a regulatory advantage the other two opportunities do not.
 
-**6. Demand Forecasting becomes the natural second move.**
+**6. Document Intelligence enables all three opportunities in sequence.**
 Once Document Intelligence is running, the structured, clean data it generates — shipment
-records, invoice data, customs clearance times — becomes the foundation for the TMS data
-quality that Demand Forecasting requires. The two opportunities are sequential, not competing.
+records, invoice data, customs clearance times — becomes the data foundation that the
+Operational Copilot requires. And once the Copilot is generating consolidated, high-quality
+operational data, Shipment Visibility & Risk Prediction becomes the natural third move.
+The three opportunities are sequential, not competing.
 
 ---
 
