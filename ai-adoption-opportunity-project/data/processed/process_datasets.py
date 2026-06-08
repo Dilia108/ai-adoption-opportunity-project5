@@ -1,74 +1,101 @@
 """
 process_datasets.py
 ===================
-Cleans and processes the three Kaggle datasets for the
+Cleans and processes source datasets for the
 AI Adoption Opportunity project (Document Intelligence for Logistics).
 
 Inputs  (place in data/raw/):
-    - customs_delay.csv
-    - logistics_ops.csv
-    - shipment_pricing.csv
+    LPI raw files (from https://databank.worldbank.org/data/download/LPI_CSV.zip):
+        LPICSV.csv          LPI data — all countries, all indicators, all years
+        LPICountry.csv      Country metadata — region, income group, etc.
+        LPISeries.csv       Indicator metadata — definitions, licence, etc.
+
+    Pre-curated project files:
+        benchmarks.csv      AI vs manual performance benchmarks
+        company_cases.csv   Operator case study results
 
 Outputs (written to data/processed/):
-    - customs_delay_clean.csv
-    - logistics_ops_clean.csv
-    - shipment_pricing_clean.csv
+    LPI_data.csv            Long-format data: one row per country × indicator × year
+    LPI_countries.csv       Country metadata with clean column names
+    LPI_indicators.csv      Indicator metadata with clean column names
+    benchmarks.csv          Validated and copied as-is
+    company_cases.csv       Validated and copied as-is
+
+Tableau connection:
+    Connect each file as a separate data source.
+    Join LPI_data ↔ LPI_countries  on  country_code = country_code
+    Join LPI_data ↔ LPI_indicators on  indicator_code = indicator_code
+
+Source:
+    World Bank Logistics Performance Index
+    License: Creative Commons Attribution 4.0 (CC BY 4.0)
 
 Usage:
-    python process_datasets.py
+    python data/processed/process_datasets.py
 
 Author:  AI Adoption Opportunity Project
 Date:    June 2026
 
-Scripts for running in PowerShell (Windows):
-PS: cd C:\Users\dilia\OneDrive\IronHack\Projects\Project5\ai-adoption-opportunity-project
-PS: python data\processed\process_datasets.py
+PowerShell (Windows):
+    cd C:\\Users\\dilia\\OneDrive\\IronHack\\Projects\\Project5\\ai-adoption-opportunity-project
+    python data\\processed\\process_datasets.py
 """
 
-import os
 import pandas as pd
-import numpy as np
 from pathlib import Path
 
 # ── Paths ──────────────────────────────────────────────────────────────────
-RAW_DIR       = Path("data/raw")
-PROCESSED_DIR = Path("data/processed")
+# Resolved relative to this script so it works regardless of where it is run.
+# Expected layout:
+#   <project_root>/
+#       data/
+#           raw/                      ← source files here
+#           processed/
+#               process_datasets.py   ← this script
+#               LPI_data.csv          ← outputs written here
+#               LPI_countries.csv
+#               LPI_indicators.csv
+
+_SCRIPT_DIR   = Path(__file__).resolve().parent   # data/processed/
+_PROJECT_ROOT = _SCRIPT_DIR.parent.parent          # <project_root>/
+
+RAW_DIR       = _PROJECT_ROOT / "data" / "raw"
+PROCESSED_DIR = _PROJECT_ROOT / "data" / "processed"
 PROCESSED_DIR.mkdir(parents=True, exist_ok=True)
+
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 
 def load_csv(filename: str) -> pd.DataFrame:
-    """Load a CSV from data/raw/ with basic feedback.
-    Tries UTF-8 first, falls back to latin-1 and cp1252 for non-UTF-8 files."""
+    """Load a CSV from data/raw/, trying utf-8 then latin-1 then cp1252."""
     path = RAW_DIR / filename
     if not path.exists():
         raise FileNotFoundError(
             f"\n[ERROR] File not found: {path}"
-            f"\nDownload it from Kaggle and place it in data/raw/"
+            f"\n        Place it in data/raw/ and re-run."
         )
     for encoding in ["utf-8", "latin-1", "cp1252"]:
         try:
             df = pd.read_csv(path, low_memory=False, encoding=encoding)
             if encoding != "utf-8":
-                print(f"[INFO]  {filename} — loaded with encoding: {encoding}")
+                print(f"[INFO]  {filename} — loaded with {encoding} encoding")
             print(f"[LOAD]  {filename} — {df.shape[0]:,} rows × {df.shape[1]} columns")
             return df
         except UnicodeDecodeError:
             continue
-    raise ValueError(f"[ERROR] Could not decode {filename} with utf-8, latin-1, or cp1252")
+    raise ValueError(f"[ERROR] Could not decode {filename}")
 
 
 def report_missing(df: pd.DataFrame, label: str) -> None:
-    """Print missing value counts for columns that have any."""
+    """Print missing value report for any columns that have nulls."""
     missing = df.isnull().sum()
     missing = missing[missing > 0]
     if missing.empty:
         print(f"[CHECK] {label} — no missing values")
     else:
-        print(f"[CHECK] {label} — missing values:")
-        for col, count in missing.items():
-            pct = count / len(df) * 100
-            print(f"        {col}: {count:,} ({pct:.1f}%)")
+        print(f"[CHECK] {label} — columns with missing values:")
+        for col, n in missing.items():
+            print(f"        {col}: {n:,} ({100 * n / len(df):.1f}%)")
 
 
 def save_csv(df: pd.DataFrame, filename: str) -> None:
@@ -79,296 +106,252 @@ def save_csv(df: pd.DataFrame, filename: str) -> None:
 
 
 # ═══════════════════════════════════════════════════════════════════════════
-# DATASET 1 — Cross-Border Trade & Customs Delay
-# Source: https://www.kaggle.com/datasets/ziya07/cross-border-trade-and-customs-delay-dataset
+# FILE 1 — LPI_data.csv
+# Source: LPICSV.csv
+# Wide → long transformation. One row per country × indicator × year.
 # ═══════════════════════════════════════════════════════════════════════════
 
-def process_customs_delay(filename: str = "customs_delay.csv") -> pd.DataFrame:
+def process_lpi_data(filename: str = "LPICSV.csv") -> pd.DataFrame:
     """
-    Clean and enrich the customs delay dataset.
+    Clean LPICSV.csv and reshape from wide to long format.
 
-    Key columns:
-        Customs_Delay_Days  — target for Panel 1 (delay by corridor)
-        Risk_Flag           — binary risk classification
-        Compliance_Score    — documentation quality proxy
-        Inspection_Type     — type of customs inspection
-        Trade_Route         — origin–destination pair
-        Prior_Offense_Count — repeat error history
+    Input (wide format):
+        Columns: Country Name, Country Code, Indicator Name, Indicator Code,
+                 2007, 2010, 2012, 2014, 2016, 2018, 2023
+
+    Output (long format) — LPI_data.csv:
+        country_code        ISO3 code — join key to LPI_countries.csv
+        country_name        e.g. "Germany"
+        indicator_code      World Bank code — join key to LPI_indicators.csv
+        indicator_name      Full indicator name
+        indicator_label     Short snake_case label  e.g. "customs_score"
+        indicator_type      "score" (1–5 scale) or "rank" (1 = best performer)
+        year                Survey year (integer)
+        value               Score or rank value
+        dataset_source      "World Bank LPI"
     """
-    print("\n── Dataset 1: Cross-Border Customs Delay ──────────────────────────")
+    print("\n── LPICSV.csv → LPI_data.csv ───────────────────────────────────────")
     df = load_csv(filename)
 
-    # ── 1. Standardise column names ────────────────────────────────────────
-    df.columns = (
-        df.columns
-        .str.strip()
-        .str.replace(" ", "_")
-        .str.replace(r"[^\w]", "", regex=True)
-        .str.lower()
+    # Validate expected columns
+    required = {"Country Name", "Country Code", "Indicator Name", "Indicator Code"}
+    missing = required - set(df.columns)
+    if missing:
+        raise ValueError(f"[ERROR] Missing columns in {filename}: {missing}")
+
+    # Detect year columns (4-digit numeric column names)
+    year_cols = sorted(
+        [c for c in df.columns if str(c).strip().isdigit() and len(str(c).strip()) == 4],
+        key=int
+    )
+    print(f"[INFO]  Survey years detected: {year_cols}")
+
+    # Melt wide → long
+    df_long = df.melt(
+        id_vars    = ["Country Name", "Country Code", "Indicator Name", "Indicator Code"],
+        value_vars = year_cols,
+        var_name   = "year",
+        value_name = "value",
     )
 
-    # ── 2. Report missing values ───────────────────────────────────────────
-    report_missing(df, "customs_delay (raw)")
+    # Cast types
+    df_long["year"]  = df_long["year"].astype(int)
+    df_long["value"] = pd.to_numeric(df_long["value"], errors="coerce")
 
-    # ── 3. Drop rows missing the primary target variable ──────────────────
-    if "customs_delay_days" in df.columns:
-        before = len(df)
-        df = df.dropna(subset=["customs_delay_days"])
-        dropped = before - len(df)
-        if dropped:
-            print(f"[DROP]  Removed {dropped:,} rows missing customs_delay_days")
+    # Drop rows where value is null (country not surveyed in that year)
+    before = len(df_long)
+    df_long = df_long.dropna(subset=["value"])
+    print(f"[DROP]  {before - len(df_long):,} null rows removed "
+          f"(countries not surveyed in a given year)")
 
-    # ── 4. Remove duplicate rows ──────────────────────────────────────────
-    before = len(df)
-    df = df.drop_duplicates()
-    if len(df) < before:
-        print(f"[DEDUP] Removed {before - len(df):,} duplicate rows")
-
-    # ── 5. Clip delay days to plausible range (0–365) ─────────────────────
-    if "customs_delay_days" in df.columns:
-        df["customs_delay_days"] = df["customs_delay_days"].clip(lower=0, upper=365)
-
-    # ── 6. Ensure compliance score is in [0, 1] ───────────────────────────
-    if "compliance_score" in df.columns:
-        df["compliance_score"] = pd.to_numeric(df["compliance_score"], errors="coerce")
-        # If score is on a 0–100 scale, normalise to 0–1
-        if df["compliance_score"].max() > 1.0:
-            df["compliance_score"] = df["compliance_score"] / 100
-        df["compliance_score"] = df["compliance_score"].clip(0, 1)
-
-    # ── 7. Encode risk flag as integer (0 / 1) ────────────────────────────
-    if "risk_flag" in df.columns:
-        df["risk_flag"] = df["risk_flag"].astype(str).str.strip().str.lower()
-        df["risk_flag"] = df["risk_flag"].map(
-            {"1": 1, "true": 1, "yes": 1, "high": 1,
-             "0": 0, "false": 0, "no": 0,  "low": 0}
-        )
-
-    # ── 8. Derive delay severity bucket (for Tableau colour encoding) ──────
-    if "customs_delay_days" in df.columns:
-        df["delay_severity"] = pd.cut(
-            df["customs_delay_days"],
-            bins=[-1, 0, 2, 7, 14, 365],
-            labels=["No delay", "1–2 days", "3–7 days", "8–14 days", "15+ days"]
-        )
-
-    # ── 9. Derive compliance tier ─────────────────────────────────────────
-    if "compliance_score" in df.columns:
-        df["compliance_tier"] = pd.cut(
-            df["compliance_score"],
-            bins=[-0.01, 0.4, 0.7, 0.9, 1.0],
-            labels=["Poor (0–40%)", "Moderate (40–70%)", "Good (70–90%)", "Excellent (90–100%)"]
-        )
-
-    # ── 10. Flag for Panel 2 join readiness ───────────────────────────────
-    df["dataset_source"] = "customs_delay"
-
-    report_missing(df, "customs_delay (clean)")
-    save_csv(df, "customs_delay_clean.csv")
-    return df
-
-
-# ═══════════════════════════════════════════════════════════════════════════
-# DATASET 2 — Logistics & Supply Chain Operations
-# Source: https://www.kaggle.com/datasets/datasetengineer/logistics-and-supply-chain-dataset
-# ═══════════════════════════════════════════════════════════════════════════
-
-def process_logistics_ops(filename: str = "logistics_ops.csv") -> pd.DataFrame:
-    """
-    Clean and enrich the logistics operations dataset.
-
-    Key columns:
-        Customs_Clearance_Time  — primary metric (Panel 3)
-        Order_Fulfillment_Status — business impact variable
-        Shipping_Costs           — cost analysis
-        Port_Congestion_Level    — contextual variable
-        Route_Risk_Level         — corridor risk
-        Timestamp                — time series analysis
-    """
-    print("\n── Dataset 2: Logistics & Supply Chain Operations ─────────────────")
-    df = load_csv(filename)
-
-    # ── 1. Standardise column names ────────────────────────────────────────
-    df.columns = (
-        df.columns
-        .str.strip()
-        .str.replace(" ", "_")
-        .str.replace(r"[^\w]", "", regex=True)
-        .str.lower()
+    # Classify indicator type: score (.XQ) or rank (.RK)
+    df_long["indicator_type"] = df_long["Indicator Code"].apply(
+        lambda c: "score" if str(c).endswith(".XQ") else "rank"
     )
 
-    # ── 2. Parse timestamp ────────────────────────────────────────────────
-    if "timestamp" in df.columns:
-        df["timestamp"] = pd.to_datetime(df["timestamp"], errors="coerce")
-        df["year"]  = df["timestamp"].dt.year
-        df["month"] = df["timestamp"].dt.month
-        df["month_name"] = df["timestamp"].dt.strftime("%b %Y")
-        df["weekday"] = df["timestamp"].dt.day_name()
-        invalid_ts = df["timestamp"].isna().sum()
-        if invalid_ts:
-            print(f"[WARN]  {invalid_ts:,} unparseable timestamps set to NaT")
+    # Round rank values to integers
+    mask = df_long["indicator_type"] == "rank"
+    df_long.loc[mask, "value"] = (
+        df_long.loc[mask, "value"].round(0).astype("Int64")
+    )
 
-    # ── 3. Report missing values ───────────────────────────────────────────
-    report_missing(df, "logistics_ops (raw)")
-
-    # ── 4. Remove duplicates ──────────────────────────────────────────────
-    before = len(df)
-    df = df.drop_duplicates()
-    if len(df) < before:
-        print(f"[DEDUP] Removed {before - len(df):,} duplicate rows")
-
-    # ── 5. Clip numeric columns to plausible ranges ───────────────────────
-    numeric_clips = {
-        "customs_clearance_time":   (0, 60),     # days
-        "shipping_costs":           (0, 500000),  # USD
-        "port_congestion_level":    (0, 10),
-        "route_risk_level":         (0, 10),
-        "supplier_reliability_score": (0, 1),
+    # Add short human-readable label per indicator code
+    label_map = {
+        "LP.LPI.OVRL.XQ": "lpi_overall_score",
+        "LP.LPI.OVRL.RK": "lpi_overall_rank",
+        "LP.LPI.CUST.XQ": "customs_score",
+        "LP.LPI.CUST.RK": "customs_rank",
+        "LP.LPI.INFR.XQ": "infrastructure_score",
+        "LP.LPI.INFR.RK": "infrastructure_rank",
+        "LP.LPI.ITRN.XQ": "intl_shipments_score",
+        "LP.LPI.ITRN.RK": "intl_shipments_rank",
+        "LP.LPI.LOGS.XQ": "logistics_competence_score",
+        "LP.LPI.LOGS.RK": "logistics_competence_rank",
+        "LP.LPI.TRAC.XQ": "tracking_tracing_score",
+        "LP.LPI.TRAC.RK": "tracking_tracing_rank",
+        "LP.LPI.TIME.XQ": "timeliness_score",
+        "LP.LPI.TIME.RK": "timeliness_rank",
     }
-    for col, (lo, hi) in numeric_clips.items():
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors="coerce")
-            df[col] = df[col].clip(lower=lo, upper=hi)
-
-    # ── 6. Encode fulfillment status ──────────────────────────────────────
-    if "order_fulfillment_status" in df.columns:
-        df["order_fulfillment_status"] = pd.to_numeric(
-            df["order_fulfillment_status"], errors="coerce"
-        ).fillna(0).astype(int)
-        df["fulfillment_label"] = df["order_fulfillment_status"].map(
-            {1: "On time", 0: "Late / failed"}
-        )
-
-    # ── 7. Clearance time bucket (for Tableau filters) ────────────────────
-    if "customs_clearance_time" in df.columns:
-        df["clearance_bucket"] = pd.cut(
-            df["customs_clearance_time"],
-            bins=[-1, 1, 3, 7, 14, 60],
-            labels=["Same day", "1–3 days", "4–7 days", "8–14 days", "15+ days"]
-        )
-
-    # ── 8. AI scenario column — apply 42% clearance reduction benchmark ───
-    # Reference: CR Express operational reporting (2025)
-    if "customs_clearance_time" in df.columns:
-        df["clearance_time_with_ai"] = (df["customs_clearance_time"] * 0.58).round(2)
-
-    # ── 9. Source label ───────────────────────────────────────────────────
-    df["dataset_source"] = "logistics_ops"
-
-    report_missing(df, "logistics_ops (clean)")
-    save_csv(df, "logistics_ops_clean.csv")
-    return df
-
-
-# ═══════════════════════════════════════════════════════════════════════════
-# DATASET 3 — Supply Chain Shipment Pricing (USAID)
-# Source: https://www.kaggle.com/datasets/apoorvwatsky/supply-chain-shipment-pricing-data
-# Official: https://data.usaid.gov/Global-Health-Supply-Chain/Supply-Chain-Shipment-Pricing-Data/a3rc-nmf6
-# ═══════════════════════════════════════════════════════════════════════════
-
-def process_shipment_pricing(filename: str = "shipment_pricing.csv") -> pd.DataFrame:
-    """
-    Clean and enrich the USAID shipment pricing dataset.
-
-    Key columns:
-        Freight_Cost_USD         — cost per shipment (Panel 4)
-        Shipment_Mode            — air / sea / road / truck
-        Country_of_Origin        — maps to Müller's corridors
-        Destination_Country      — maps to Müller's corridors
-        Line_Item_Value          — invoice complexity proxy
-        Weight_Kilograms         — shipment size proxy
-    """
-    print("\n── Dataset 3: Supply Chain Shipment Pricing (USAID) ───────────────")
-    df = load_csv(filename)
-
-    # ── 1. Standardise column names ────────────────────────────────────────
-    df.columns = (
-        df.columns
-        .str.strip()
-        .str.replace(" ", "_")
-        .str.replace(r"[^\w]", "", regex=True)
-        .str.lower()
+    df_long["indicator_label"] = (
+        df_long["Indicator Code"].map(label_map)
+        .fillna(df_long["Indicator Code"])
     )
 
-    # ── 2. Report missing values ───────────────────────────────────────────
-    report_missing(df, "shipment_pricing (raw)")
+    # Add source label
+    df_long["dataset_source"] = "World Bank LPI"
 
-    # ── 3. Remove duplicates ──────────────────────────────────────────────
+    # Rename and order columns
+    df_long = df_long.rename(columns={
+        "Country Name":   "country_name",
+        "Country Code":   "country_code",
+        "Indicator Name": "indicator_name",
+        "Indicator Code": "indicator_code",
+    })
+
+    df_long = df_long[[
+        "country_code", "country_name",
+        "indicator_code", "indicator_name", "indicator_label", "indicator_type",
+        "year", "value", "dataset_source",
+    ]].sort_values(["country_name", "indicator_label", "year"]).reset_index(drop=True)
+
+    report_missing(df_long, "LPI_data")
+    print(f"[INFO]  {df_long['country_code'].nunique()} countries · "
+          f"{df_long['indicator_label'].nunique()} indicators · "
+          f"{sorted(df_long['year'].unique())} years")
+    save_csv(df_long, "LPI_data.csv")
+    return df_long
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FILE 2 — LPI_countries.csv
+# Source: LPICountry.csv
+# Select useful columns, clean names. Join key: country_code.
+# ═══════════════════════════════════════════════════════════════════════════
+
+def process_lpi_countries(filename: str = "LPICountry.csv") -> pd.DataFrame:
+    """
+    Clean LPICountry.csv — keep the columns useful for Tableau analysis.
+
+    Output — LPI_countries.csv:
+        country_code        ISO3 code — join key to LPI_data.csv
+        country_short_name  e.g. "Germany"
+        country_long_name   e.g. "Federal Republic of Germany"
+        alpha2_code         2-letter ISO code e.g. "DE"
+        region              e.g. "Europe & Central Asia"
+        income_group        e.g. "High income"
+        currency            e.g. "Euro"
+    """
+    print("\n── LPICountry.csv → LPI_countries.csv ─────────────────────────────")
+    df = load_csv(filename)
+
+    # Map source columns to clean output names — only keep what's useful
+    col_map = {
+        "Country Code": "country_code",
+        "Short Name":   "country_short_name",
+        "Long Name":    "country_long_name",
+        "2-alpha code": "alpha2_code",
+        "Region":       "region",
+        "Income Group": "income_group",
+        "Currency Unit":"currency",
+    }
+
+    # Keep only columns that exist in the file
+    available = {k: v for k, v in col_map.items() if k in df.columns}
+    df_out = df[list(available.keys())].rename(columns=available).copy()
+
+    # Remove duplicate country codes if any
+    before = len(df_out)
+    df_out = df_out.drop_duplicates(subset=["country_code"])
+    if len(df_out) < before:
+        print(f"[DEDUP] Removed {before - len(df_out):,} duplicate country rows")
+
+    df_out = df_out.sort_values("country_short_name").reset_index(drop=True)
+
+    report_missing(df_out, "LPI_countries")
+    print(f"[INFO]  {len(df_out)} countries")
+    save_csv(df_out, "LPI_countries.csv")
+    return df_out
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FILE 3 — LPI_indicators.csv
+# Source: LPISeries.csv
+# Select useful columns, clean names. Join key: indicator_code.
+# ═══════════════════════════════════════════════════════════════════════════
+
+def process_lpi_indicators(filename: str = "LPISeries.csv") -> pd.DataFrame:
+    """
+    Clean LPISeries.csv — keep the columns useful for Tableau tooltips
+    and indicator filtering.
+
+    Output — LPI_indicators.csv:
+        indicator_code      World Bank code — join key to LPI_data.csv
+        indicator_name      Full name e.g. "Efficiency of the clearance process..."
+        long_definition     Methodology and survey description
+        licence_type        e.g. "CC BY-4.0"
+    """
+    print("\n── LPISeries.csv → LPI_indicators.csv ─────────────────────────────")
+    df = load_csv(filename)
+
+    col_map = {
+        "Series Code":     "indicator_code",
+        "Indicator Name":  "indicator_name",
+        "Long definition": "long_definition",
+        "License Type":    "licence_type",
+    }
+
+    available = {k: v for k, v in col_map.items() if k in df.columns}
+    df_out = df[list(available.keys())].rename(columns=available).copy()
+
+    # Add short label (same map as LPI_data for easy cross-reference)
+    label_map = {
+        "LP.LPI.OVRL.XQ": "lpi_overall_score",
+        "LP.LPI.OVRL.RK": "lpi_overall_rank",
+        "LP.LPI.CUST.XQ": "customs_score",
+        "LP.LPI.CUST.RK": "customs_rank",
+        "LP.LPI.INFR.XQ": "infrastructure_score",
+        "LP.LPI.INFR.RK": "infrastructure_rank",
+        "LP.LPI.ITRN.XQ": "intl_shipments_score",
+        "LP.LPI.ITRN.RK": "intl_shipments_rank",
+        "LP.LPI.LOGS.XQ": "logistics_competence_score",
+        "LP.LPI.LOGS.RK": "logistics_competence_rank",
+        "LP.LPI.TRAC.XQ": "tracking_tracing_score",
+        "LP.LPI.TRAC.RK": "tracking_tracing_rank",
+        "LP.LPI.TIME.XQ": "timeliness_score",
+        "LP.LPI.TIME.RK": "timeliness_rank",
+    }
+    df_out["indicator_label"] = (
+        df_out["indicator_code"].map(label_map)
+        .fillna(df_out["indicator_code"])
+    )
+
+    # Reorder columns
+    col_order = ["indicator_code", "indicator_label", "indicator_name",
+                 "long_definition", "licence_type"]
+    col_order = [c for c in col_order if c in df_out.columns]
+    df_out = df_out[col_order].sort_values("indicator_label").reset_index(drop=True)
+
+    report_missing(df_out, "LPI_indicators")
+    print(f"[INFO]  {len(df_out)} indicators")
+    save_csv(df_out, "LPI_indicators.csv")
+    return df_out
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# FILES 4 & 5 — benchmarks.csv and company_cases.csv
+# Pre-curated files — validate and copy only, no transformations.
+# ═══════════════════════════════════════════════════════════════════════════
+
+def validate_and_copy(filename: str) -> pd.DataFrame:
+    """Validate a pre-curated CSV and copy it to data/processed/."""
+    print(f"\n── {filename} (pre-curated) ─────────────────────────────────────")
+    df = load_csv(filename)
+    report_missing(df, filename)
     before = len(df)
     df = df.drop_duplicates()
     if len(df) < before:
         print(f"[DEDUP] Removed {before - len(df):,} duplicate rows")
-
-    # ── 4. Parse and clean freight cost ──────────────────────────────────
-    freight_col = next(
-        (c for c in df.columns if "freight" in c and "cost" in c), None
-    )
-    if freight_col:
-        df[freight_col] = (
-            df[freight_col]
-            .astype(str)
-            .str.replace(r"[$,]", "", regex=True)
-            .str.strip()
-        )
-        df[freight_col] = pd.to_numeric(df[freight_col], errors="coerce")
-        # Remove negative costs and extreme outliers (> USD 2M)
-        df[freight_col] = df[freight_col].clip(lower=0, upper=2_000_000)
-        df = df.rename(columns={freight_col: "freight_cost_usd"})
-
-    # ── 5. Parse weight ───────────────────────────────────────────────────
-    weight_col = next(
-        (c for c in df.columns if "weight" in c or "kg" in c), None
-    )
-    if weight_col:
-        df[weight_col] = pd.to_numeric(df[weight_col], errors="coerce")
-        df[weight_col] = df[weight_col].clip(lower=0, upper=500_000)
-        df = df.rename(columns={weight_col: "weight_kg"})
-
-    # ── 6. Standardise shipment mode ─────────────────────────────────────
-    mode_col = next(
-        (c for c in df.columns if "shipment_mode" in c or "mode" in c), None
-    )
-    if mode_col:
-        df[mode_col] = df[mode_col].astype(str).str.strip().str.title()
-        df = df.rename(columns={mode_col: "shipment_mode"})
-
-    # ── 7. Standardise country columns ───────────────────────────────────
-    # Flag countries relevant to Müller's network
-    muller_countries = {
-        "Germany", "France", "Ghana", "Mozambique",
-        "Namibia", "South Africa", "Canada", "United States"
-    }
-    for col in df.columns:
-        if "country" in col or "origin" in col or "destination" in col:
-            df[col] = df[col].astype(str).str.strip().str.title()
-
-    # Add Müller relevance flag if origin or destination column exists
-    origin_col = next((c for c in df.columns if "origin" in c), None)
-    dest_col   = next((c for c in df.columns if "destination" in c), None)
-    if origin_col and dest_col:
-        df["muller_corridor"] = (
-            df[origin_col].isin(muller_countries) |
-            df[dest_col].isin(muller_countries)
-        )
-
-    # ── 8. Cost per kg (normalised cost metric) ───────────────────────────
-    if "freight_cost_usd" in df.columns and "weight_kg" in df.columns:
-        df["cost_per_kg"] = np.where(
-            df["weight_kg"] > 0,
-            (df["freight_cost_usd"] / df["weight_kg"]).round(4),
-            np.nan
-        )
-
-    # ── 9. Parse scheduled delivery / actual dates if present ────────────
-    for col in df.columns:
-        if "date" in col or "scheduled" in col or "delivery" in col:
-            df[col] = pd.to_datetime(df[col], errors="coerce")
-
-    # ── 10. Source label ──────────────────────────────────────────────────
-    df["dataset_source"] = "usaid_shipment_pricing"
-
-    report_missing(df, "shipment_pricing (clean)")
-    save_csv(df, "shipment_pricing_clean.csv")
+    save_csv(df, filename)
     return df
 
 
@@ -384,30 +367,46 @@ def main():
 
     results = {}
 
-    # Process each dataset — skip gracefully if file not yet downloaded
-    for fn, processor in [
-        ("customs_delay.csv",    process_customs_delay),
-        ("logistics_ops.csv",    process_logistics_ops),
-        ("shipment_pricing.csv", process_shipment_pricing),
-    ]:
+    # ── LPI files ─────────────────────────────────────────────────────────
+    lpi_processors = [
+        ("LPICSV.csv",      process_lpi_data),
+        ("LPICountry.csv",  process_lpi_countries),
+        ("LPISeries.csv",   process_lpi_indicators),
+    ]
+    for raw_file, processor in lpi_processors:
         try:
-            results[fn] = processor(fn)
+            key = processor.__name__.replace("process_lpi_", "LPI_") + ".csv"
+            results[raw_file] = processor(raw_file)
         except FileNotFoundError as e:
             print(str(e))
-            print("        Skipping — add the file to data/raw/ and re-run.\n")
+        except ValueError as e:
+            print(str(e))
+
+    # ── Pre-curated project files ─────────────────────────────────────────
+    for filename in ["benchmarks.csv", "company_cases.csv"]:
+        try:
+            results[filename] = validate_and_copy(filename)
+        except FileNotFoundError as e:
+            print(str(e))
 
     # ── Summary ───────────────────────────────────────────────────────────
     print("\n" + "=" * 60)
     print("  Processing complete")
     print("=" * 60)
-    for fn, df in results.items():
-        print(f"  ✓  {fn.replace('.csv','')} → {df.shape[0]:,} rows × {df.shape[1]} cols")
+    for fname, df in results.items():
+        print(f"  ✓  {fname:30} → {df.shape[0]:,} rows × {df.shape[1]} cols")
 
-    print(f"\n  Cleaned files saved to: {PROCESSED_DIR.resolve()}")
-    print("\n  Next steps:")
-    print("  1. Open Tableau and connect to data/processed/")
-    print("  2. Connect benchmarks.csv and company_cases.csv as separate sources")
-    print("  3. Build panels following dashboard_panels.md")
+    print(f"\n  Files saved to: {PROCESSED_DIR.resolve()}")
+    print("\n  Tableau connection guide:")
+    print("  1. Connect LPI_data.csv as primary data source")
+    print("  2. Join LPI_countries.csv  on  country_code  =  country_code")
+    print("  3. Join LPI_indicators.csv on  indicator_code = indicator_code")
+    print("  4. Connect benchmarks.csv as separate data source")
+    print("  5. Connect company_cases.csv as separate data source")
+    print("\n  Useful filters in Tableau:")
+    print("  indicator_type  = 'score'         → 1–5 scale values only")
+    print("  indicator_label = 'customs_score' → Panel 1 chart")
+    print("  year            = 2023            → latest survey round")
 
 
 if __name__ == "__main__":

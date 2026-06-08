@@ -17,7 +17,10 @@ and flags uncertain data for human review.
 **Why it fits Müller's company:**
 - 16 locations across 8 countries = high daily volume of cross-border documents
 - Operations in Africa (Ghana, Mozambique, Namibia, South Africa), North America (Canada, USA),
-  and Europe — each with different document formats, languages, and customs regimes
+  and Europe — each with different document formats, languages, and customs regimes. The World Bank
+  Logistics Performance Index 2023 scores Müller's corridors from 4.0 (Canada) to 2.1 (Mozambique)
+  on customs efficiency — a 1.9-point gap that directly amplifies the cost of every document error.
+  *(Source: World Bank LPI 2023 — https://databank.worldbank.org/data/download/LPI_CSV.zip)*
 - Energy, textiles, furniture, and plant engineering clients = complex, varied cargo descriptions
   requiring accurate HS code classification
 - Existing documents are available immediately — no dependency on historical data quality

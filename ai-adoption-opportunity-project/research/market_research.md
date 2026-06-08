@@ -210,3 +210,4 @@ CSRD emissions reporting — eliminating a separate data collection process.
 | DocShipper — AI Changing Logistics 2025 | Trade publication | https://docshipper.com/logistics/ai-changing-logistics-supply-chain-2025/ |
 | GlobeNewswire — Freight Forwarding Market 2025–2034 | Market report | https://www.globenewswire.com/news-release/2025/06/24/3104015/28124/en/Freight-Forwarding-Industry-Outlook-Report-2025-2034-AI-and-Blockchain-Revolutionizing-the-249-Bn-Market.html |
 | European Commission EU Customs Reform | Government source | https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en |
+| World Bank Logistics Performance Index 2023 | Government / open dataset | https://databank.worldbank.org/data/download/LPI_CSV.zip |
