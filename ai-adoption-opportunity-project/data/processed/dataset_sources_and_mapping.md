@@ -18,11 +18,11 @@ AI is introduced as the answer to a problem already established — not as a pro
 
 | Panel | Title | Dataset(s) | What it shows |
 |---|---|---|---|
-| 1 | 1 in 8 documents contains an error | `benchmarks.csv` (Manual scenario) | Manual error rate, cost per invoice, processing time, staff throughput — the daily reality before any technology |
-| 2 | Three error types — three consequences | `benchmarks.csv` (Manual scenario) | Wrong HS code → fine + hold; missing document → clearance hold 3–14 days; value mismatch → physical inspection |
-| 3 | Each error compounds into a chain of business cost | `benchmarks.csv` (Supply Chain Impact + ROI categories) | Cost chain: error → hold → mode switch → margin hit; AP cycle time before/after; logistics cost, margin, and service level impact |
-| 4 | AI eliminates each error type at source | `benchmarks.csv` (AI scenario) + `company_cases.csv` | Same three error types from Panel 2, resolved; before/after on error rate, time, accuracy; CSG, CR Express, KlearNow proof |
-| 5 | The financial return — and why the timing matters | `benchmarks.csv` (ROI & Financial + Market & Adoption) | Cost per invoice, processing time, AP cycle time, payback, first-year ROI, margin impact; competitive adoption gap |
+| 1 | 1 in 8 documents contains an error | `benchmarks.xlsx` (Manual scenario) | Manual error rate, cost per invoice, processing time, staff throughput — the daily reality before any technology |
+| 2 | Three error types — three consequences | `benchmarks.xlsx` (Manual scenario) | Wrong HS code → fine + hold; missing document → clearance hold 3–14 days; value mismatch → physical inspection |
+| 3 | Each error compounds into a chain of business cost | `benchmarks.xlsx` (Supply Chain Impact + ROI categories) | Cost chain: error → hold → mode switch → margin hit; AP cycle time before/after; logistics cost, margin, and service level impact |
+| 4 | AI eliminates each error type at source | `benchmarks.xlsx` (AI scenario) + `company_cases.xlsx` | Same three error types from Panel 2, resolved; before/after on error rate, time, accuracy; CSG, CR Express, KlearNow proof |
+| 5 | The financial return — and why the timing matters | `benchmarks.xlsx` (ROI & Financial + Market & Adoption) | Cost per invoice, processing time, AP cycle time, payback, first-year ROI, margin impact; competitive adoption gap |
 
 ---
 
@@ -30,11 +30,11 @@ AI is introduced as the answer to a problem already established — not as a pro
 
 | Processed file | Source | Used in panels | Notes |
 |---|---|---|---|
-| `LPI_data.csv` | `LPICSV.csv` (World Bank) | Panel 1 (supporting context) | LPI corridor scores embedded as supporting context inside Panel 1, not as a standalone chart |
-| `LPI_countries.csv` | `LPICountry.csv` (World Bank) | Panel 1 (supporting context) | Joined to LPI_data in Tableau for region and income group |
-| `LPI_indicators.csv` | `LPISeries.csv` (World Bank) | Panel 1 (supporting context) | Joined to LPI_data in Tableau for indicator definitions |
-| `benchmarks.csv` | Pre-curated | Panels 1–5 | Primary data source across all panels; filter by scenario and category |
-| `company_cases.csv` | Pre-curated | Panel 4 | Filter `relevance_to_muller` = "Direct" for the proof section |
+| `LPI_data.xlsx` | `LPICSV.csv` (World Bank) | Panel 1 (supporting context) | LPI corridor scores embedded as supporting context inside Panel 1, not as a standalone chart |
+| `LPI_countries.xlsx` | `LPICountry.csv` (World Bank) | Panel 1 (supporting context) | Joined to LPI_data in Tableau for region and income group |
+| `LPI_indicators.xlsx` | `LPISeries.csv` (World Bank) | Panel 1 (supporting context) | Joined to LPI_data in Tableau for indicator definitions |
+| `benchmarks.xlsx` | Pre-curated | Panels 1–5 | Primary data source across all panels; filter by scenario and category |
+| `company_cases.xlsx` | Pre-curated | Panel 4 | Filter `relevance_to_muller` = "Direct" for the proof section |
 
 ---
 
@@ -46,7 +46,7 @@ AI is introduced as the answer to a problem already established — not as a pro
 **Act:** Problem
 **Hook:** The error rate as an immediate, operational number Olaf can translate to his own volume.
 
-**Primary dataset:** `benchmarks.csv` — filter `scenario = 'Manual'`
+**Primary dataset:** `benchmarks.xlsx` — filter `scenario = 'Manual'`
 
 | Metric shown | Column | Value |
 |---|---|---|
@@ -59,7 +59,7 @@ AI is introduced as the answer to a problem already established — not as a pro
 | Document accuracy | `metric` = Document accuracy rate | 88% |
 
 **Supporting context (inside panel, not lead):**
-World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.csv` on `indicator_label = 'customs_score'` and `year = 2023`. Used to explain that errors cost more in low-LPI corridors (Ghana rank 97, Mozambique rank 115, Namibia rank 66) — not as a standalone chart.
+World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.xlsx` on `indicator_label = 'customs_score'` and `year = 2023`. Used to explain that errors cost more in low-LPI corridors (Ghana rank 97, Mozambique rank 115, Namibia rank 66) — not as a standalone chart.
 
 **AP (accounts payable) cycle time definition (display as footnote):**
 *AP cycle time = days from receiving an invoice to completing processing, validation, and approval for payment.*
@@ -70,7 +70,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 **Act:** Problem
 **Structure:** Three mirrored cards — same layout reused in Panel 4 so Olaf reads Panel 4 as "problem resolved."
 
-**Primary dataset:** `benchmarks.csv` — filter `scenario = 'Manual'`, `category = 'Document Processing'`
+**Primary dataset:** `benchmarks.xlsx` — filter `scenario = 'Manual'`, `category = 'Document Processing'`
 
 | Card | Error type | Label | Consequence shown |
 |---|---|---|---|
@@ -91,7 +91,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 ### Panel 3 — Each error compounds into a chain of business cost
 **Act:** Problem — bridge between Panel 2 errors and Panel 5 ROI
 
-**Primary dataset:** `benchmarks.csv` — filter `category IN ('Supply Chain Impact', 'ROI & Financial')`
+**Primary dataset:** `benchmarks.xlsx` — filter `category IN ('Supply Chain Impact', 'ROI & Financial')`
 
 **Cost chain (left to right — hardcoded labels, values from benchmarks):**
 
@@ -107,13 +107,13 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 *Left — AP cycle time (bar chart, manual vs AI for context):*
 - Manual: 45 days
 - With AI: 12 days
-- Source: `benchmarks.csv`, `metric` = AP cycle time
+- Source: `benchmarks.xlsx`, `metric` = AP cycle time
 
 *Right — Business impact (bar chart, amber — shows cost of NOT acting):*
 - Logistics cost reduction potential: 15%
 - Margin improvement for mid-market 3PLs: 52.5%
 - Service level improvement: 65%
-- Source: `benchmarks.csv`, `category = 'Supply Chain Impact'`
+- Source: `benchmarks.xlsx`, `category = 'Supply Chain Impact'`
 
 **Callout text (hardcoded):**
 *At 4–7% net margins, a 2–3% cost increase from document-driven delays is not a rounding error. For energy and industrial clients with zero tolerance for delivery failures, the reputational cost compounds the financial one.*
@@ -124,7 +124,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 **Act:** Solution
 **Structure:** Three mirrored cards matching Panel 2 exactly — same error type labels, same card order. Green bottoms replace red/amber to signal resolution.
 
-**Primary dataset 1:** `benchmarks.csv` — filter `scenario = 'AI'`
+**Primary dataset 1:** `benchmarks.xlsx` — filter `scenario = 'AI'`
 
 | Before/after metric | Manual value | AI value | Column |
 |---|---|---|---|
@@ -135,7 +135,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | Simple tasks efficiency | baseline | +99% | `metric` = Documentation efficiency simple |
 | Complex declarations | baseline | +36% | `metric` = Documentation efficiency complex |
 
-**Primary dataset 2:** `company_cases.csv` — filter `relevance_to_muller = 'Direct'`, `result_type = 'Quantitative'`
+**Primary dataset 2:** `company_cases.xlsx` — filter `relevance_to_muller = 'Direct'`, `result_type = 'Quantitative'`
 
 | Company | Metric shown | Value | Highlight |
 |---|---|---|---|
@@ -151,7 +151,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 ### Panel 5 — The financial return — and why the timing matters
 **Act:** Solution
 
-**Primary dataset:** `benchmarks.csv` — filter `category = 'ROI & Financial'`
+**Primary dataset:** `benchmarks.xlsx` — filter `category = 'ROI & Financial'`
 
 | ROI card | Manual | AI | Metric column |
 |---|---|---|---|
@@ -162,7 +162,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | First-year ROI | — | 30–200% | First-year ROI |
 | Margin improvement | Net 4–7% | +30–75% | Margin improvement |
 
-**Competitive gap chart:** `benchmarks.csv` — filter `category = 'Market & Adoption'`
+**Competitive gap chart:** `benchmarks.xlsx` — filter `category = 'Market & Adoption'`
 - Large enterprises AI adoption: 70%
 - Mid-sized providers (Müller): 28%
 
@@ -173,7 +173,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 
 ## Benchmark Data Reference
 
-### benchmarks.csv — scenario = 'Manual' (Panels 1–3)
+### benchmarks.xlsx — scenario = 'Manual' (Panels 1–3)
 
 | Category | Metric | Value | Source |
 |---|---|---|---|
@@ -188,7 +188,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | Supply Chain Impact | Margin improvement | 52.5% | European Logistics Association 2025 |
 | Supply Chain Impact | Service level improvement | 65% | StartUs Insights 2025 |
 
-### benchmarks.csv — scenario = 'AI' (Panel 4)
+### benchmarks.xlsx — scenario = 'AI' (Panel 4)
 
 | Category | Metric | Value | Source |
 |---|---|---|---|
@@ -202,7 +202,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | Customs Clearance | Documentation efficiency complex | +36% | Customs Support Group 2025 |
 | Customs Clearance | Document accuracy rate | 99.5% | CR Express 2025 |
 
-### benchmarks.csv — category = 'ROI & Financial' (Panel 5)
+### benchmarks.xlsx — category = 'ROI & Financial' (Panel 5)
 
 | Metric | Value | Source |
 |---|---|---|
@@ -213,7 +213,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | Staff productivity gain | +50% | Docsumo 2025 |
 | 3-year median ROI | 3.5× investment | McKinsey via DocShipper 2025 |
 
-### benchmarks.csv — category = 'Market & Adoption' (Panel 5)
+### benchmarks.xlsx — category = 'Market & Adoption' (Panel 5)
 
 | Metric | Value | Source |
 |---|---|---|
@@ -222,7 +222,7 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 
 ---
 
-## company_cases.csv — Panel 4 Reference
+## company_cases.xlsx — Panel 4 Reference
 
 Filter: `relevance_to_muller = 'Direct'`, `result_type = 'Quantitative'`
 
@@ -240,13 +240,13 @@ Filter: `relevance_to_muller = 'Direct'`, `result_type = 'Quantitative'`
 
 ## World Bank LPI — Tableau Join Guide
 
-**Files:** `LPI_data.csv`, `LPI_countries.csv`, `LPI_indicators.csv`
+**Files:** `LPI_data.xlsx`, `LPI_countries.xlsx`, `LPI_indicators.xlsx`
 **Used in:** Panel 1 supporting context only
 
 **In Tableau Data Source tab:**
-1. Connect `LPI_data.csv` as primary source
-2. Add `LPI_countries.csv` — join on `country_code = country_code`
-3. Add `LPI_indicators.csv` — join on `indicator_code = indicator_code`
+1. Connect `LPI_data.xlsx` as primary source
+2. Add `LPI_countries.xlsx` — join on `country_code = country_code`
+3. Add `LPI_indicators.xlsx` — join on `indicator_code = indicator_code`
 
 **Filters for Panel 1 context:**
 - `indicator_label = 'customs_score'`
@@ -289,7 +289,7 @@ Filter: `relevance_to_muller = 'Direct'`, `result_type = 'Quantitative'`
 - **Analyst sources cited within:** Gartner Magic Quadrant for IDP 2025; IDC MarketScape IDP 2025–2026
 
 ### World Bank LPI
-- **Download:** https://databank.worldbank.org/data/download/LPI_CSV.zip
+- **Download:** https://databank.worldbank.org/data/download/LPI_xlsx.zip
 - **License:** Creative Commons Attribution 4.0 (CC BY 4.0)
 - **Survey:** 652 logistics professionals, 139 countries, 2023
 - **Note on Mozambique:** No 2023 survey data available; 2016 score (2.5) used as most recent available
