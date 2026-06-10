@@ -176,7 +176,25 @@ A licensed customs declarant reviews all Orange and Red fields via the review in
 
 ---
 
-## 4. Technical Infrastructure Requirements
+## 4. Summary — AI, Automation, and Human Responsibilities Across the Four Stages
+
+| Stage | Component | Type |
+|---|---|---|
+| Stage 1 | Document classification | AI (ML — CNN / Vision Transformer) |
+| Stage 2 | Field extraction from documents | AI (OCR + ML + NLP) |
+| Stage 2 | HS code cross-referencing and flagging | AI (NLP) |
+| Stage 3 | Confidence scoring per field | AI (ML probability output) |
+| Stage 3 | Cross-validation rules (value, weight, origin) | Rule-based automation |
+| Stage 3 | Document completeness check | Rule-based automation |
+| Stage 4 | Human review of flagged fields | Human judgment |
+| Stage 4 | Legal sign-off and submission to customs | Human — legally required under EU UCC |
+| Stage 4 | Declarant corrections fed back to model | Human input → AI continuous learning |
+
+**The honest framing:** The AI does the reading and judges its own certainty. The rules do the arithmetic checks. The human retains legal and professional responsibility at the submission point. These three layers work together — none replaces the others.
+
+---
+
+## 5. Technical Infrastructure Requirements
 
 ### 4.1 Deployment options
 
@@ -219,7 +237,7 @@ A licensed customs declarant reviews all Orange and Red fields via the review in
 
 ---
 
-## 5. AI Model Specification
+## 6. AI Model Specification
 
 ### 5.1 Model types used
 
@@ -259,7 +277,7 @@ A licensed customs declarant reviews all Orange and Red fields via the review in
 
 ---
 
-## 6. Data Pipeline — Data Engineer Specification
+## 7. Data Pipeline — Data Engineer Specification
 
 ### 6.1 Pipeline architecture
 
@@ -300,7 +318,7 @@ Email / FTP / API ────► Document ingestion ──────► Revie
 
 ---
 
-## 7. Compliance and Legal Technical Requirements
+## 8. Compliance and Legal Technical Requirements
 
 | Requirement | Technical implementation |
 |---|---|
@@ -316,7 +334,7 @@ Email / FTP / API ────► Document ingestion ──────► Revie
 
 ---
 
-## 8. Vendor Selection Criteria
+## 9. Vendor Selection Criteria
 
 The AI Engineer and IT lead will evaluate shortlisted vendors against the following criteria during Phase 1:
 
@@ -340,7 +358,7 @@ The AI Engineer and IT lead will evaluate shortlisted vendors against the follow
 
 ---
 
-## 9. Known Technical Risks and Mitigations
+## 10. Known Technical Risks and Mitigations
 
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
@@ -354,7 +372,7 @@ The AI Engineer and IT lead will evaluate shortlisted vendors against the follow
 
 ---
 
-## 10. Open Questions for Phase 1 Assessment
+## 11. Open Questions for Phase 1 Assessment
 
 The following must be confirmed before technical design is finalised:
 
