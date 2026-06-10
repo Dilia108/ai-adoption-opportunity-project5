@@ -18,8 +18,7 @@ The company specialises in three core service lines:
 - **Transport logistics** — multi-modal freight across road, sea, and air
 
 ### Sectors served
-Energy, textiles, furniture, and plant engineering — with clients ranging from multinational
-retailers to large-scale industrial operators requiring specialised handling and compliance.
+Energy, textiles, furniture, plant engineering (transporting large, heavy, or specialized machinery and components) and hazardous-goods logistics — with clients ranging from multinational retailers to large-scale industrial operators requiring specialised handling and compliance.
 
 ### Identity and values
 The company's differentiation is built on designing **flexible, client-specific logistics concepts**
@@ -99,7 +98,7 @@ While the presentation is one-to-one, Olaf Müller will internally consult or de
 |---|---|---|
 | Head of Customs / Operations | "Will this create more work for my team during rollout?" | Frame as burden removal — repetitive data entry eliminated, not expertise replaced |
 | IT / Systems lead | "Can this integrate with our TMS without a major project?" | Confirm API/export capability assessment as a defined early step; integration cost budgeted explicitly |
-| Finance / CFO function | "What is the actual cost and what is the actual return?" | Use conservative 6-month ROI model, not 60–90 day headline; present cost range with 30% contingency built in |
+| Finance / CFO function | "What is the actual cost and what is the actual return?" | Use conservative 6-month ROI model, not 3–4 month headline; present cost range with 30% contingency built in |
 | Customs declarants (operational staff) | "Is this replacing my job?" | Traffic light confidence system keeps human sign-off mandatory — legally and operationally non-negotiable |
 | Legal / Compliance | "Are we exposed under GDPR, EU AI Act, or African data protection law?" | DPA, data residency, and POPIA requirements are already mapped and built into the implementation plan |
 
@@ -112,7 +111,7 @@ While the presentation is one-to-one, Olaf Müller will internally consult or de
 | Constraint | Status | Approach |
 |---|---|---|
 | Budget | Not confirmed — treat as unknown | Present cost as a range (low–medium); lead with ROI and payback speed before cost; avoid anchoring with a single figure |
-| Timeline | Not confirmed — treat as unknown | The 60–90 day payback case creates its own urgency; frame the question as cost of delay, not pressure to decide |
+| Timeline | Not confirmed — treat as unknown | The 3–4 month payback case creates its own urgency; frame the question as cost of delay, not pressure to decide |
 | Internal capacity for a parallel project | Unknown | Staged rollout (one corridor first) is designed to minimise internal burden; position this explicitly |
 | Risk appetite | Unknown — infer as moderate-conservative given energy/industrial client base | Lead with the "additive, not disruptive" implementation model and the mandatory human review layer |
 | Existing system dependencies | TMS confirmed; integration complexity unknown | Flag API/export assessment as a defined first step — not an assumption |
@@ -257,7 +256,7 @@ and flags uncertain data for human review before submission.
 
 **Implementation profile:**
 - Requires: existing documents — no historical data build-up needed
-- Timeline to ROI: 60–90 days
+- Timeline to ROI: 3–4 months
 - Cost: low–medium
 - Risk: low — additive to existing workflows, no process redesign required
 
@@ -291,7 +290,7 @@ giving planners early warning on delays before they affect clients.
 | Factor | Document Intelligence | Operational Copilot for Planners | Shipment Visibility & Risk Prediction |
 |---|---|---|---|
 | Data needed | Existing documents (immediate) | 2+ years TMS history | 2+ years shipment & carrier history |
-| Time to first ROI | 60–90 days | 6–18 months | 12–24 months |
+| Time to first ROI | 3–4 months | 6–18 months | 12–24 months |
 | Implementation cost | Low–medium | Medium–high | High |
 | Relevance to multi-country ops | Very high (cross-border = customs volume) | High (16 locations) | High (multi-corridor routing) |
 | Risk level | Low (additive to current workflows) | Medium (data quality) | Medium–high (integration complexity) |
@@ -309,7 +308,7 @@ including African corridors where data infrastructure varies — cannot be assum
 complete. Document Intelligence starts with documents that already exist today.
 
 **2. Fastest payback in logistics AI.**
-60–90 days to ROI is the fastest documented payback of any AI use case in this sector. At 4–7%
+3–4 months to ROI is the fastest documented payback of any AI use case in this sector. At 4–7%
 net margins, a 2–3% cost reduction translates to a 30–75% margin improvement. That is a
 board-level number.
 
@@ -433,7 +432,7 @@ CSG AI detail, March 2026 — https://www.customssupport.com/artificial-intellig
 ## 9. Justification — Why This Use Case
 
 ### 8.1 Speed of return
-Document Intelligence delivers ROI in **60–90 days** — faster than any other AI use case in
+Document Intelligence delivers ROI in **3–4 months** — faster than any other AI use case in
 logistics. It does not require historical data collection, model training from scratch, or process
 redesign. Existing documents are the input.
 *(Source: Docsumo IDP Market Report 2025 —

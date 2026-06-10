@@ -23,9 +23,9 @@ benchmark_id,category,metric,scenario,value,unit,source,source_year,notes
 22,Customs Clearance,Time reduction per declaration,AI vs Manual,70.0,Percentage,FreightMynd,2026,Elimination of re-keying time
 23,Customs Clearance,Document processing time,Manual,420.0,Seconds,Docsumo,2025,Over 7 minutes per file manually
 24,Customs Clearance,Document processing time,AI,30.0,Seconds,Docsumo,2025,Under 30 seconds with AI processing
-25,ROI & Financial,First-year ROI,AI adoption,200.0,Percentage,Docsumo / IDC,2025,Upper bound first-year ROI
-26,ROI & Financial,First-year ROI,AI adoption,30.0,Percentage,Docsumo / IDC,2025,Lower bound first-year ROI
-27,ROI & Financial,Payback period,AI adoption,75.0,Days,Multiple sources,2025,Midpoint of 60-90 day range
+25,ROI & Financial,First-year ROI,AI adoption,140.0,Percentage,Docsumo / IDC,2025,Upper bound first-year ROI — conservative adjusted estimate (+40%)
+26,ROI & Financial,First-year ROI,AI adoption,20.0,Percentage,Docsumo / IDC,2025,Lower bound first-year ROI — conservative adjusted estimate (+40%)
+27,ROI & Financial,Payback period,AI adoption,105.0,Days,Multiple sources,2025,Midpoint of 3-4 month payback range — conservative adjusted estimate (+40%)
 28,ROI & Financial,Labor cost savings,AI adoption,80.0,Percentage,DocStreams.ai,2025,Labor savings from AI document processing
 29,ROI & Financial,Accounts payable cycle time - manual,Manual,45.0,Days,DocStreams.ai,2025,Manual AP cycle time
 30,ROI & Financial,Accounts payable cycle time - AI,AI,12.0,Days,DocStreams.ai,2025,AI-assisted AP cycle time

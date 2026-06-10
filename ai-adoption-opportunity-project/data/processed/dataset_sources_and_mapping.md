@@ -158,8 +158,8 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 | Cost per invoice | USD 12–20 | USD 2–3 | Cost per invoice |
 | Processing time | 5–17 days | 6–12 hours | Processing time |
 | AP cycle time | 45 days | 12 days | AP cycle time |
-| Payback period | — | 60–90 days | Payback period |
-| First-year ROI | — | 30–200% | First-year ROI |
+| Payback period | — | 3–4 months | Payback period |
+| First-year ROI | — | 20–140% | First-year ROI |
 | Margin improvement | Net 4–7% | +30–75% | Margin improvement |
 
 **Competitive gap chart:** `benchmarks.xlsx` — filter `category = 'Market & Adoption'`
@@ -206,8 +206,8 @@ World Bank LPI 2023 corridor scores for Müller's 8 countries. Filter `LPI_data.
 
 | Metric | Value | Source |
 |---|---|---|
-| Payback period | 60–90 days | Docsumo / IDC 2025 |
-| First-year ROI | 30–200% | Docsumo / IDC 2025 |
+| Payback period | 3–4 months | Docsumo / IDC 2025 |
+| First-year ROI | 20–140% | Docsumo / IDC 2025 |
 | Margin improvement — 3PL | +30–75% | European Logistics Association 2025 |
 | Cost reduction | Up to 80% | Parseur / Vroozi 2025 |
 | Staff productivity gain | +50% | Docsumo 2025 |

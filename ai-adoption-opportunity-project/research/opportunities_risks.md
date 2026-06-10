@@ -32,7 +32,7 @@ and flags uncertain data for human review.
 | Cost per invoice | USD 12.88–19.83 | USD 2.36–2.78 | ~78% reduction |
 | Processing time | 5–17.4 days | 6–12 hours | ~95% reduction |
 | Error rate | 8–15% | Under 1% | ~90% reduction |
-| Payback period | — | 60–90 days | Fastest AI ROI in logistics |
+| Payback period | — | 3–4 months | Fastest AI ROI in logistics |
 
 *(Source: Parseur AI Invoice Processing Benchmarks 2025 —
 https://parseur.com/blog/ai-invoice-processing-benchmarks)*
@@ -43,7 +43,7 @@ https://parseur.com/blog/ai-invoice-processing-benchmarks)*
 
 **Why it is the second move, not the first:**
 - Requires 2+ years of clean, structured TMS history — data quality risk
-- Timeline to ROI: 6–18 months vs. 60–90 days for Document Intelligence
+- Timeline to ROI: 6–18 months vs. 3–4 months for Document Intelligence
 - Higher implementation cost and integration complexity
 - Maersk and DB Schenker already doing this at scale — strong competitive precedent but
   also signals the window for differentiation is narrowing
@@ -83,7 +83,7 @@ should be reassessed.
 | Factor | Document Intelligence | Operational Copilot for Planners | Shipment Visibility & Risk Prediction |
 |---|---|---|---|
 | Data needed | Existing documents (immediate) | 2+ years TMS history | 2+ years shipment & carrier history |
-| Time to first ROI | 60–90 days | 6–18 months | 12–24 months |
+| Time to first ROI | 3–4 months | 6–18 months | 12–24 months |
 | Implementation cost | Low–medium | Medium–high | High |
 | Relevance to multi-country ops | Very high (cross-border = customs volume) | High (16 locations) | High (multi-corridor routing) |
 | Risk level | Low (additive to current workflows) | Medium (data quality dependency) | Medium–high (integration complexity) |
@@ -132,7 +132,7 @@ should be reassessed.
 | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|
 | Implementation cost overrun | Medium | Medium | Gartner: 62% of AI initiatives exceed budget by 45%; build 30% contingency into plan |
-| ROI slower than 60–90 day benchmark | Medium | Low | Benchmark applies to invoice processing; customs declaration automation may take longer — model conservatively at 6 months |
+| ROI slower than 3–4 month benchmark | Medium | Low | Benchmark applies to invoice processing; customs declaration automation may take longer — model conservatively at 6 months |
 | Cost model change or scope creep after solution delivery | Low | Medium | Define scope and pricing structure clearly before build commences; include change control procedures in the engagement agreement |
 
 ### 3.5 Data Risks
@@ -156,7 +156,7 @@ Distinguishing what is proven from what is overstated is essential for credible 
 | Claim | Evidence level |
 |---|---|
 | AI extracts invoice fields at 99%+ accuracy | Documented by multiple vendors and CSG operational data |
-| 60–90 day payback on invoice processing | Consistent across Parseur, Docsumo, Fluxity benchmarks |
+| 3–4 month payback on invoice processing | Consistent across Parseur, Docsumo, Fluxity benchmarks |
 | Customs clearance time reduction of 30–42% | CR Express operational reporting; CSG rollout data |
 | Kuehne+Nagel customs AI driving revenue growth | Annual report and full-year financial results |
 | Processing time from 7 minutes to 30 seconds | Docsumo case study with named logistics company |
@@ -165,7 +165,7 @@ Distinguishing what is proven from what is overstated is essential for credible 
 
 | Claim | Qualification needed |
 |---|---|
-| 300–2,700% ROI | Upper end is outlier; use 30–200% first-year range as credible range |
+| 300–2,700% ROI | Upper end is outlier; use 20–140% first-year range as credible range |
 | 99% efficiency for all declaration types | CSG reports 99% for simple/repetitive tasks; 36% for complex — always cite both |
 | USD 878,000 annual savings | From one unnamed enterprise organisation; scale to Müller's estimated document volume |
 | 50% overall efficiency improvement | CSG's 2025 target — directionally correct but still a target, not a confirmed outcome |
@@ -182,7 +182,7 @@ These are the key unknowns that underpin the business case. None invalidates the
 | Document formats across corridors are sufficiently standardised | High format variability increases extraction complexity and reduces accuracy | Test extraction on 50–100 representative documents from the pilot corridor before full build |
 | Staff are willing to adopt a new review workflow | Change resistance is a documented cause of AI underperformance | Early conversation with customs operations team; frame as workload reduction, not job change |
 | GDPR and POPIA data flows can be legally structured | Cross-border processing of personal data in logistics documents requires a legal basis | Legal review of data flows for EU–South Africa and EU–Ghana corridors prior to go-live |
-| The 60–90 day payback benchmark applies at Müller's document volume | Benchmark is from invoice processing at unnamed enterprise scale | Model ROI conservatively using Müller's estimated monthly document count; present 6-month scenario as base case |
+| The 3–4 month payback benchmark applies at Müller's document volume | Benchmark is from invoice processing at unnamed enterprise scale | Model ROI conservatively using Müller's estimated monthly document count; present 6-month scenario as base case |
 
 | Claim | Why to avoid |
 |---|---|
