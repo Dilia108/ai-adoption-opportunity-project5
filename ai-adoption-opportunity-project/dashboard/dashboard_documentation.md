@@ -18,20 +18,20 @@ No mention of AI. The viewer reads three panels that describe the current operat
 AI is introduced as the answer to a problem already established. Panel 4 resolves each error type from Panel 2. Panel 5 presents the financial return and the competitive urgency.
 
 **Supporting panels:**
-- Panel 1b adds geographic context — not all corridors carry the same risk
+- Panel 1.2 adds geographic context — not all corridors carry the same risk
 - Panel 6 consolidates all sources
 
 **Story flow:**
 
 | Panel | Title | Act |
 |---|---|---|
-| 1 | 1 in 8 documents contains an error | Problem |
-| 1b | Not all corridors carry the same risk | Problem |
+| 1.1 | 1 in 8 documents contains an error | Problem |
+| 1.2 | Not all corridors carry the same risk | Problem |
 | 2 | Three error types — three consequences | Problem |
-| 3a | Each error compounds into a chain of business cost | Problem |
-| 3b | Business costs are increased by each error | Problem |
-| 4a | AI eliminates each error type at source | Solution |
-| 4b | What this produces — before and after | Solution |
+| 3.1 | Each error compounds into a chain of business cost | Problem |
+| 3.2 | Business costs are increased by each error | Problem |
+| 4.1 | AI eliminates each error type at source | Solution |
+| 4.2 | What this produces — before and after | Solution |
 | 5 | The financial return — and why timing matters | Solution |
 | 6 | Sources | Reference |
 
@@ -43,14 +43,14 @@ AI is introduced as the answer to a problem already established. Panel 4 resolve
 
 | File | Location | Used in panels | Description |
 |---|---|---|---|
-| `benchmarks.xlsx` | `data/processed/benchmarks.xlsx` | 1, 1b, 2, 3, 4, 5 | Pre-curated AI vs manual performance benchmarks. One row per metric per scenario. Key columns: `metric`, `scenario`, `kpi_value`, `unit`, `category`, `source` |
-| `company_cases.xlsx` | `data/processed/company_cases.xlsx` | 4b | Operator case study results. Filtered on `relevance_to_muller = 'Direct'` and `result_type = 'Quantitative'` for the "Real companies — direct results" chart |
-| `LPI_data.xlsx` | `data/processed/LPI_data.xlsx` | 1b | World Bank Logistics Performance Index 2023. One row per country × indicator × year. Key columns: `country_name`, `indicator_label`, `value`, `year` |
-| `LPI_countries.xlsx` | `data/processed/LPI_countries.xlsx` | 1b | Country metadata joined to LPI_data. Key columns: `country_code`, `country_short_name`, `region`, `income_group` |
+| `benchmarks.xlsx` | `data/processed/benchmarks.xlsx` | 1.1, 1.2, 2, 3, 4, 5 | Pre-curated AI vs manual performance benchmarks. One row per metric per scenario. Key columns: `metric`, `scenario`, `kpi_value`, `unit`, `category`, `source` |
+| `company_cases.xlsx` | `data/processed/company_cases.xlsx` | 4.2 | Operator case study results. Filtered on `relevance_to_muller = 'Direct'` and `result_type = 'Quantitative'` for the "Real companies — direct results" chart |
+| `LPI_data.xlsx` | `data/processed/LPI_data.xlsx` | 1.2 | World Bank Logistics Performance Index 2023. One row per country × indicator × year. Key columns: `country_name`, `indicator_label`, `value`, `year` |
+| `LPI_countries.xlsx` | `data/processed/LPI_countries.xlsx` | 1.2 | Country metadata joined to LPI_data. Key columns: `country_code`, `country_short_name`, `region`, `income_group` |
 
 ### 2.2 Data source joins
 
-**LPI join (Panel 1b):**
+**LPI join (Panel 1.2):**
 `LPI_data.xlsx` is the primary table. `LPI_countries.xlsx` is joined on `country_code = country_code` via a Tableau relationship. This adds `region` and `income_group` to the LPI data for color-coding by income group on the corridor chart.
 
 ### 2.3 Key filters applied across sheets
@@ -59,13 +59,13 @@ AI is introduced as the answer to a problem already established. Panel 4 resolve
 |---|---|---|
 | `scenario` | `Manual` | Panels 1, 2, 3 |
 | `scenario` | `AI` or `AI adoption` | Panel 4 |
-| `scenario` | `Manual` + `AI` | Panel 4b small multiples |
-| `category` | `Document Processing` | KPI sheets, Panel 1 |
+| `scenario` | `Manual` + `AI` | Panel 4.2 small multiples |
+| `category` | `Document Processing` | KPI sheets, Panel 1.1 |
 | `category` | `ROI & Financial` | Panel 5 ROI table |
 | `category` | `Market & Adoption` | Panel 5 competitive gap chart |
-| `category` | `Supply Chain Impact` | Panel 3b |
-| `indicator_label` | `customs_score` | Panel 1b corridor chart |
-| `country_code` | DEU, FRA, GHA, MOZ, NAM, ZAF, CAN, USA | Panel 1b |
+| `category` | `Supply Chain Impact` | Panel 3.2 |
+| `indicator_label` | `customs_score` | Panel 1.2 corridor chart |
+| `country_code` | DEU, FRA, GHA, MOZ, NAM, ZAF, CAN, USA | Panel 1.2 |
 
 ### 2.4 Calculated fields
 
@@ -73,13 +73,13 @@ AI is introduced as the answer to a problem already established. Panel 4 resolve
 |---|---|---|
 | `Scenario Grouped` | `IF [scenario] = "AI adoption" THEN "AI" ELSE [scenario] END` | Merges "AI" and "AI adoption" into one column for Panel 5 ROI table |
 | `ROI Display` | `IF [metric] = "First-year ROI" THEN "20-140%" ELSEIF [metric] = "Payback period" THEN "3-4 months" ELSEIF [metric] = "Cost per invoice" AND [scenario] = "Manual" THEN "EUR 12-20" ELSEIF [metric] = "Cost per invoice" AND [scenario] = "AI" THEN "EUR 2-3" ELSEIF [metric] = "Accounts payable cycle time - manual" THEN "45 days → 12 days (with AI)" ELSEIF [metric] = "Margin improvement for 3PL" THEN "+30-75%" ELSE STR([kpi_value]) END` | Formats Panel 5 ROI table values as readable ranges |
-| `Customs Score (FIXED)` | `{ FIXED [country_name] : MAX(IF [indicator_label] = "customs_score" THEN [value] END) }` | Extracts customs score per country for Panel 1b |
-| `Customs Rank (FIXED)` | `{ FIXED [country_name] : MAX(IF [indicator_label] = "customs_rank" THEN [value] END) }` | Extracts customs rank per country for Panel 1b stat boxes |
-| `Error Rate Display` | `STR(INT([kpi_value])) + "+"` | Formats error rate for KPI card on Panel 1 |
+| `Customs Score (FIXED)` | `{ FIXED [country_name] : MAX(IF [indicator_label] = "customs_score" THEN [value] END) }` | Extracts customs score per country for Panel 1.2 |
+| `Customs Rank (FIXED)` | `{ FIXED [country_name] : MAX(IF [indicator_label] = "customs_rank" THEN [value] END) }` | Extracts customs rank per country for Panel 1.2 stat boxes |
+| `Error Rate Display` | `STR(INT([kpi_value])) + "+"` | Formats error rate for KPI card on Panel 1.1 |
 | `Cost Per Invoice Display` | `"$" + STR(INT(MIN([kpi_value]))) + "–" + STR(INT(MAX([kpi_value])))` | Formats cost range for KPI card |
 | `Time Per Doc Display` | `STR(INT([kpi_value] / 60)) + "+ min"` | Converts seconds to minutes for KPI card |
 | `AP Cycle Time Display` | `STR(INT([kpi_value])) + " days"` | Formats AP cycle time for KPI card |
-| `Gauge Error Rate` | `SUM(IF [metric] = "Error rate" AND [scenario] = "Manual" THEN [kpi_value] END)` | Drives accuracy gauge chart on Panel 1 |
+| `Gauge Error Rate` | `SUM(IF [metric] = "Error rate" AND [scenario] = "Manual" THEN [kpi_value] END)` | Drives accuracy gauge chart on Panel 1.1 |
 
 ---
 
@@ -121,7 +121,7 @@ Supporting gauge for document accuracy rate.
 
 ---
 
-### Panel 1b sheets
+### Panel 1.2 sheets
 
 **`RiskMap_Corridor`**
 Horizontal bar chart — customs efficiency score (1–5) for Müller's 8 operating corridors, colored by income group, with a reference line at 3.0.
@@ -135,7 +135,7 @@ Supporting sheet for the LPI corridor chart.
 
 ---
 
-### Panel 3b sheets
+### Panel 3.2 sheets
 
 **`AP cycle time (days)`**
 Bar chart — Manual (45 days, grey) vs AI (12 days, green).
@@ -150,7 +150,7 @@ Bar chart — three amber bars showing potential impact of AI adoption: logistic
 
 ---
 
-### Panel 4b sheets
+### Panel 4.2 sheets
 
 **`metric_error_rate`**
 Two-bar chart — Manual (11.5%) vs AI (0.5%).
@@ -199,8 +199,8 @@ Text table — financial return comparison across five metrics: Cost per invoice
 - *What it means:* Side-by-side view of the financial position without AI (Baseline) vs with AI.
 - *Why it matters:* Translates all previous operational metrics into financial language for the CEO.
 
-**`Real companies`** (also used in Panel 4b)
-See Panel 4b description above.
+**`Real companies`** (also used in Panel 4.2)
+See Panel 4.2 description above.
 
 **Competitive gap chart** (built from `benchmarks.xlsx`, `Market & Adoption` category)
 Two-bar chart — Large enterprises: 70% AI adoption vs Mid-size providers: 28%.
@@ -216,7 +216,7 @@ Two-bar chart — Large enterprises: 70% AI adoption vs Mid-size providers: 28%.
 The dashboard deliberately withholds AI until Panel 4. Panels 1–3 establish the problem using only operational data — error rates, consequences, cost chains — so that when AI appears in Panel 4, it is the answer to a problem already felt, not a product pitch. This mirrors the structure of effective executive presentations: problem first, solution second.
 
 ### 4.2 Panel 2 ↔ Panel 4 mirror
-The three error type cards in Panel 2 (Wrong HS code, Missing document, Value mismatch) use the same layout as Panel 4a. Red and amber borders in Panel 2 become green borders in Panel 4. The visual continuity is intentional — Olaf reads Panel 4 as "these same problems, resolved."
+The three error type cards in Panel 2 (Wrong HS code, Missing document, Value mismatch) use the same layout as Panel 4.1. Red and amber borders in Panel 2 become green borders in Panel 4. The visual continuity is intentional — Olaf reads Panel 4 as "these same problems, resolved."
 
 ### 4.3 Color system
 The dashboard uses a consistent four-color system throughout:
@@ -231,17 +231,17 @@ The dashboard uses a consistent four-color system throughout:
 
 ### 4.4 Static images for narrative cards
 Three panels use PNG images rather than live Tableau objects:
-- **Panel 1b stat boxes** (Ghana, Namibia, Mozambique rank callouts)
-- **Panel 3a cost chain** (cascade of five steps: Document Error → Customs Hold → Missed Window → Expedite Shipment → Margin Erosion)
-- **Panel 4a three error cards** (Wrong HS code, Missing document, Value mismatch)
+- **Panel 1.2 stat boxes** (Ghana, Namibia, Mozambique rank callouts)
+- **Panel 3.1 cost chain** (cascade of five steps: Document Error → Customs Hold → Missed Window → Expedite Shipment → Margin Erosion)
+- **Panel 4.1 three error cards** (Wrong HS code, Missing document, Value mismatch)
 
 These are static because their content is hardcoded narrative text with no data behind it. Using images gives full typographic control (colored left borders, font weights, card layout) that Tableau text objects cannot replicate precisely.
 
-### 4.5 Small multiples for before/after metrics (Panel 4b)
+### 4.5 Small multiples for before/after metrics (Panel 4.2)
 Six separate charts rather than one combined chart. When Manual and AI metrics share an axis, the story is compressed — the reader has to work to see the contrast. Six individual charts, each scaled to its own metric, make every improvement immediately visible.
 
 ### 4.6 Reference line at 3.0 on corridor chart
-The World Bank LPI scale runs 1–5. A reference line at 3.0 on the Panel 1b corridor chart creates a visual threshold — corridors above 3.0 (Europe, North America) vs corridors below (Africa). This is not an official World Bank threshold but a presentational device to make the geographic risk argument immediately readable.
+The World Bank LPI scale runs 1–5. A reference line at 3.0 on the Panel 1.2 corridor chart creates a visual threshold — corridors above 3.0 (Europe, North America) vs corridors below (Africa). This is not an official World Bank threshold but a presentational device to make the geographic risk argument immediately readable.
 
 ### 4.7 Text table for Panel 5 ROI
 The financial return is presented as a text table rather than bar charts. Financial metrics at CEO level are most credible as numbers, not visualised proportions. The ROI Display calculated field formats ranges (20–140%, 3–4 months) as text rather than averaged numeric values, which would misrepresent the data.
@@ -251,7 +251,7 @@ The financial return is presented as a text table rather than bar charts. Financ
 ## 5. How to Use the Dashboard
 
 ### 5.1 Presenting to Olaf Müller
-The dashboard is designed for linear, panel-by-panel presentation. Navigate using the Tableau story navigator or present each dashboard tab sequentially. The recommended presentation order follows the panel numbering: 1 → 1b → 2 → 3a → 3b → 4a → 4b → 5 → 6.
+The dashboard is designed for linear, panel-by-panel presentation. Navigate using the Tableau story navigator or present each dashboard tab sequentially. The recommended presentation order follows the panel numbering: 1.1 → 1.2 → 2 → 3.1 → 3.2 → 4.1 → 4.2 → 5 → 6.
 
 Do not skip from Panel 1 to Panel 4. The emotional logic of the presentation depends on the problem being fully established before the solution appears.
 
@@ -266,19 +266,19 @@ All panels except the static image panels update automatically when the source E
 2. In Tableau: **Data** menu → **Refresh Data Sources** (or press F5)
 3. All live charts update immediately
 
-**Static image panels** (Panel 1b stat boxes, Panel 3a cost chain, Panel 4a cards) must be regenerated manually as PNG files if their content changes. Source SVG files are available for re-export.
+**Static image panels** (Panel 1.2 stat boxes, Panel 3.1 cost chain, Panel 4.1 cards) must be regenerated manually as PNG files if their content changes. Source SVG files are available for re-export.
 
 ### 5.4 Workbook locale
 The workbook locale is set to **English (United States)** to ensure decimal separators display as periods (3.9) rather than commas (3,9) throughout. Do not change the workbook locale without reviewing all formatted calculated fields.
 
-### 5.5 Adding a new corridor to Panel 1b
+### 5.5 Adding a new corridor to Panel 1.2
 1. Add the country to `LPI_data.xlsx` with `indicator_label = 'customs_score'`
 2. Add the country metadata to `LPI_countries.xlsx`
 3. Update the `country_code` filter on the `customs efficiency` sheet to include the new country code
 4. Refresh the data source
 
 ### 5.6 Known limitations
-- **Mozambique data is from 2016.** No 2023 World Bank LPI survey data is available for Mozambique. The 2016 score (2.5) is used as the most recent available. A footnote is included on Panel 1b.
+- **Mozambique data is from 2016.** No 2023 World Bank LPI survey data is available for Mozambique. The 2016 score (2.5) is used as the most recent available. A footnote is included on Panel 1.2.
 - **First-year ROI is displayed as a range (20–140%), not a single value.** This is intentional — the ROI Display calculated field hardcodes the range as text. The underlying data rows (20 and 140) are averaged by Tableau if the raw `kpi_value` field is used instead.
 - **Cost per invoice values are in EUR in documentation but display as USD in some KPI cards.** This reflects the original benchmark sources (Parseur/APQC, denominated in USD). For a EUR-denominated presentation, update the `Cost Per Invoice Display` calculated field to replace `"$"` with `"€"`.
 
@@ -290,52 +290,53 @@ The workbook locale is set to **English (United States)** to ensure decimal sepa
 
 ---
 
-### Screenshot 1 — Panel 1: 1 in 8 documents contains an error
+### Screenshot 1 — Panel 1.1: 1 in 8 documents contains an error
 **What to capture:** Full panel showing the four KPI cards (error rate, cost per invoice, time per document, AP cycle time) and the accuracy gauge.
 **Key visual:** The 8–15% error rate headline and the 89% accuracy gauge.
-**File name suggestion:** `screenshot_panel1_error_rate.png`
+**Screenshot:**  ![screenshot_panel1_error_rate](screenshots/image.png)
 
 ---
 
-### Screenshot 2 — Panel 1b: Not all corridors carry the same risk
+### Screenshot 2 — Panel 1.2: Not all corridors carry the same risk
 **What to capture:** Full panel showing the horizontal bar chart with the 3.0 reference line, the three country stat boxes (Ghana, Namibia, Mozambique), and the callout text.
 **Key visual:** The clear gap between the four navy bars (Europe/North America, 3.7–4.0) and the four amber/red bars (Africa, 2.5–3.4).
-**File name suggestion:** `screenshot_panel1b_corridor_risk.png`
+**Screenshot:** ![screenshot_panel1.2_corridor_risk](screenshots/image-1.png)
 
 ---
 
 ### Screenshot 3 — Panel 2: Three error types — three consequences
 **What to capture:** Full panel showing the three cards side by side (Wrong HS code / Missing document / Value mismatch) with red and amber top borders.
-**Key visual:** The three-card layout that mirrors Panel 4a — the before state.
-**File name suggestion:** `screenshot_panel2_error_types.png`
+**Key visual:** The three-card layout that mirrors Panel 4.1 — the before state.
+**Screenshot:** ![screenshot_panel2_error_types](screenshots/image-2.png)
 
 ---
 
-### Screenshot 4 — Panel 3a: Cost chain cascade
+### Screenshot 4 — Panel 3.1: Cost chain cascade
 **What to capture:** Full panel showing the five-step cascade (Document Error → Customs Hold → Missed Delivery Window → Expedite Shipment → Margin Erosion).
 **Key visual:** The downward arrows connecting each step; the red borders on steps 1 and 5.
-**File name suggestion:** `screenshot_panel3a_cost_chain.png`
+**Screenshot 3.1:** ![screenshot_panel3.1_cost_chain](screenshots/image-3.png)
+**Screenshot 3.2:** ![screenshot_panel3.1_business_impact](screenshots/image-4.png)
 
 ---
 
-### Screenshot 5 — Panel 4a: AI eliminates each error type at source
+### Screenshot 5 — Panel 4.1: AI eliminates each error type at source
 **What to capture:** Full panel showing the three cards with green bottom bands, the AI outcome text for each error type, and the callout text.
 **Key visual:** The green bottom bands replacing the red/amber of Panel 2 — the mirror resolution.
-**File name suggestion:** `screenshot_panel4a_ai_solution.png`
+**Screenshot:** ![screenshot_panel4.1_ai_solution](screenshots/image-5.png)
 
 ---
 
-### Screenshot 6 — Panel 4b: What this produces — before and after
+### Screenshot 6 — Panel 4.2: What this produces — before and after
 **What to capture:** Full panel showing the six small multiples (error rate, accuracy, processing time, fields pre-populated, clearance time, simple task efficiency) and the real companies bar chart.
 **Key visual:** The error rate chart (11.5% grey vs 0.5% green) and the real companies chart with CSG at 99%.
-**File name suggestion:** `screenshot_panel4b_before_after.png`
+**Screenshot:** ![screenshot_panel4.2_before_after](screenshots/image-6.png)
 
 ---
 
 ### Screenshot 7 — Panel 5: The financial return
 **What to capture:** Full panel showing the ROI text table (left) and the competitive gap bar chart (right, 70% vs 28%) with the callout text below.
 **Key visual:** The competitive gap chart — the visual argument for acting now rather than waiting.
-**File name suggestion:** `screenshot_panel5_financial_return.png`
+**Screenshot:** ![screenshot_panel5_financial_return](screenshots/image-7.png)
 
 ---
 
@@ -347,14 +348,14 @@ ai-adoption-opportunity-project/
 ├── data/
 │   └── processed/
 │       ├── benchmarks.xlsx          ← Primary benchmark data (all panels)
-│       ├── company_cases.xlsx       ← Operator case studies (Panel 4b)
-│       ├── LPI_data.xlsx            ← World Bank LPI scores (Panel 1b)
-│       └── LPI_countries.xlsx       ← Country metadata (Panel 1b)
+│       ├── company_cases.xlsx       ← Operator case studies (Panel 4.2)
+│       ├── LPI_data.xlsx            ← World Bank LPI scores (Panel 1.2)
+│       └── LPI_countries.xlsx       ← Country metadata (Panel 1.2)
 │
 ├── assets/
-│   ├── cost_chain.png               ← Panel 3a static image
-│   ├── panel4_cards_final.png       ← Panel 4a static image
-│   └── [panel1b_stats.png]          ← Panel 1b stat boxes (if generated)
+│   ├── cost_chain.png               ← Panel 3.1 static image
+│   ├── panel4_cards_final.png       ← Panel 4.1 static image
+│   └── [panel1.2_stats.png]          ← Panel 1.2 stat boxes (if generated)
 │
 ├── docs/
 │   ├── dataset_sources_and_mapping.md
@@ -378,7 +379,7 @@ ai-adoption-opportunity-project/
 | Panel | Sources |
 |---|---|
 | 1 | Fluxity.ai 2025 · Parseur / APQC 2025 · Docsumo IDP 2025 · DocStreams.ai 2025 |
-| 1b | World Bank Logistics Performance Index 2023 (CC BY 4.0) · lpi.worldbank.org |
+| 1.2 | World Bank Logistics Performance Index 2023 (CC BY 4.0) · lpi.worldbank.org |
 | 2–3 | Fluxity.ai 2025 · Parseur 2025 · Docsumo 2025 · StartUs Insights / McKinsey 2025 · European Logistics Association 2025 |
 | 4 | CSG press release May 2025 · Intelligent CIO Europe April 2025 · CR Express Dec 2025 · FreightMynd Jan 2026 · KlearNow.AI 2025 |
 | 5 | Docsumo / IDC 2025 · European Logistics Association 2025 · Penske Transportation Leaders Survey 2025 · DocShipper 2025 · Parseur / Vroozi 2025 |
