@@ -35,6 +35,10 @@ AI is introduced as the answer to a problem already established. Panel 4 resolve
 | 5 | The financial return — and why timing matters | Solution |
 | 6 | Sources | Reference |
 
+
+**Honest approach followed:**
+The original story flow was different. The planned graphs and initial dataset were mostly dropped. I thought this final story was the best and easiest. As for the graphs, I'm aware they can be improved, but considerable time was invested in creating simple ones. Nevertheless, I can confirm that the learning experience was highly satisfactory. 
+
 ---
 
 ## 2. Data Sources
@@ -345,31 +349,48 @@ The workbook locale is set to **English (United States)** to ensure decimal sepa
 ```
 ai-adoption-opportunity-project/
 │
+├── cost_estimation/
+│   └── cost_analysis.md                  ← Cost scenarios and ROI model
+│
+├── dashboard/
+│   ├── screenshots/                      ← Panel screenshots (see Section 6)
+│   └── dashboard_documentation.md        ← This file
+│
 ├── data/
-│   └── processed/
-│       ├── benchmarks.xlsx          ← Primary benchmark data (all panels)
-│       ├── company_cases.xlsx       ← Operator case studies (Panel 4.2)
-│       ├── LPI_data.xlsx            ← World Bank LPI scores (Panel 1.2)
-│       └── LPI_countries.xlsx       ← Country metadata (Panel 1.2)
+│   ├── processed/                        ← Clean files connected to Tableau
+│   │   ├── benchmarks.xlsx               ← Primary benchmark data (all panels)
+│   │   ├── company_cases.xlsx            ← Operator case studies (Panel 4.2)
+│   │   ├── dataset_sources_and_mapping.md← Data lineage and panel mapping
+│   │   ├── LPI_countries.xlsx            ← Country metadata (Panel 1.2)
+│   │   ├── LPI_data.xlsx                 ← World Bank LPI scores (Panel 1.2)
+│   │   ├── LPI_indicators.xlsx           ← LPI indicator definitions
+│   │   └── process_datasets.py           ← Script to regenerate processed files
+│   │
+│   └── raw/                              ← Original source files
+│       ├── benchmarks.csv
+│       ├── company_cases.csv
+│       ├── LPICountry.csv
+│       ├── LPICSV.csv
+│       └── LPISeries.csv
 │
-├── assets/
-│   ├── cost_chain.png               ← Panel 3.1 static image
-│   ├── panel4_cards_final.png       ← Panel 4.1 static image
-│   └── [panel1.2_stats.png]          ← Panel 1.2 stat boxes (if generated)
+├── implementation/
+│   ├── implementation_plan.md            ← Phase-by-phase implementation steps
+│   ├── solution_proposal.md              ← Investment recommendation and solution design
+│   ├── technical_solution_draft.md       ← Technical architecture and AI specification
+│   └── timeline_estimate.md             ← Timeline with 40% conservative adjustment
 │
-├── docs/
-│   ├── dataset_sources_and_mapping.md
-│   ├── use_case_discovery.md
-│   ├── market_research.md
-│   ├── opportunities_risks.md
-│   ├── solution_proposal.md
-│   ├── implementation_plan.md
-│   ├── cost_analysis.md
-│   ├── timeline_estimate.md
-│   ├── technical_solution_draft.md
-│   └── dashboard_documentation.md   ← this file
+├── presentation/                         ← Tableau workbook and static panel assets
+│   └── Dashboard_ai_opportunity_v2.twb  ← Tableau workbook
 │
-└── Dashboard_ai_opportunity_v2.twb  ← Tableau workbook
+├── research/
+│   ├── market_research.md               ← Industry overview and adoption signals
+│   ├── opportunities_risks.md           ← Opportunity comparison and risk register
+│   ├── sources.md                       ← Consolidated source list
+│   └── use_case_discovery.md            ← Full use case justification
+│
+├── README.md                             ← Project overview and documentation index
+├── requirements.txt                      ← Python dependencies
+└── .gitignore
 ```
 
 ---
