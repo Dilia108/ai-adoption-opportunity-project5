@@ -146,6 +146,8 @@ Bar chart — Manual (45 days, grey) vs AI (12 days, green).
 - *What it means:* Side-by-side comparison of AP cycle time before and after AI adoption.
 - *Why it matters:* A 33-day reduction in AP cycle time directly impacts working capital, supplier payment terms, and finance team capacity.
 
+**Note:** AP cycle time refers to accounts payable cycle time, meaning the number of days from receiving an invoice to completing its processing and approval for payment.
+
 **`Business Impact`**
 Bar chart — three amber bars showing potential impact of AI adoption: logistics cost reduction (15%), margin improvement (52.5%), service level improvement (65%).
 - *What it means:* Aggregate impact metrics from early AI adopters in logistics, sourced from McKinsey, StartUs Insights, and the European Logistics Association.
@@ -193,6 +195,15 @@ Single bar — AI: 99% efficiency improvement on simple tasks.
 Horizontal bar chart — quantitative results from Direct-relevance operator case studies: CSG, CR Express, FreightMynd, KlearNow.AI, unnamed mid-size logistics operator.
 - *What it means:* Named companies with structurally similar operations to Müller have achieved these results in production deployments — not benchmarks or projections.
 - *Why it matters:* Addresses Olaf's likely concern: "Is this proven at a company our size?" CSG (14 European markets, same customs workflows) is the most direct answer.
+
+**Short descriptions of the referred companies:**
+
+* **CSG — Customs Support Group**: A European customs and trade solutions provider operating across 14 European markets. Deployed AI-powered document processing in 2025. The closest structural benchmark to Müller — same scale, same customs workflows, same document types.
+* **CR Express**: A Chinese cross-border e-commerce logistics operator running Container Freight Station (CFS) operations. Achieved 42% clearance time reduction and 99.5% document accuracy with AI document processing.
+* **FreightMynd**: A logistics AI platform specialising in customs declaration automation. Their benchmark of 85% fields pre-populated from commercial invoices and packing lists is the source for the fields pre-populated metric.
+* **KlearNow.AI**: A US-based customs intelligence platform. Reported 85% reduction in manual entry errors across their customs document processing deployments.
+* **Processing time reduction (unnamed)**: This one is the exception — it's a mid-size logistics company that reported 90% processing time reduction. The company name was not disclosed in the source (DocShipper 2025 trade publication). The result is real but the operator is anonymous.
+
 
 ---
 
