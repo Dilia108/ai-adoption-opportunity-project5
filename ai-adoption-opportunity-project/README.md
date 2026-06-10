@@ -2,6 +2,7 @@
 **Project type:** AI Use Case Discovery, Business Case, and Dashboard Prototype
 **Client:** CEO Olaf Müller, Hamburg-based logistics and transportation company (500 employees, 16 locations, 8 countries)
 **Prepared:** June 2026
+**Author:** Dilia Navarro
 
 ---
 
@@ -10,6 +11,15 @@
 This project identifies, justifies, and presents the strongest AI adoption opportunity for a mid-size third-party logistics provider (3PL) operating across Europe, North America, and Sub-Saharan Africa. The recommended use case is **Document Intelligence** — AI-powered extraction, validation, and pre-population of customs and invoice data.
 
 The deliverables include a Tableau dashboard built as an executive presentation, a full implementation plan, a technical solution draft, and supporting business case documentation.
+
+
+**Process note:**
+
+This project went through two phases before reaching its current form.
+
+The initial research phase explored publicly available datasets — including Kaggle logistics and customs datasets and Hugging Face document processing datasets. This was very usefull to understand public data available. Nevertheless, after assessment, none provided the field-level specificity needed for a credible CEO-level business case. The decision was made to build the data foundation from pre-curated benchmark files sourced from named industry publications, operator case studies from public press releases and annual reports, and the World Bank LPI dataset for geographic context. Every number in the dashboard has a named source and a URL.
+
+The dashboard also evolved during construction. Several visualisations were simplified from their original design — combined charts replaced with small multiples, some panels split in two to avoid overcrowding. These decisions prioritised readability over technical complexity, reflecting what communicates most effectively in a one-to-one executive presentation.
 
 ---
 
