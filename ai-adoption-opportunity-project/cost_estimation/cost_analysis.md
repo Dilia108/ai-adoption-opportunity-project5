@@ -12,11 +12,11 @@
 |---|---|---|---|
 | Platform / SaaS licence (annual) | EUR 18,000 | EUR 60,000 | Consumption or per-document pricing typical |
 | Implementation & integration | EUR 15,000 | EUR 45,000 | TMS integration is the primary variable |
-| Internal staff time (Phase 1–3) | EUR 25,000 | EUR 55,000 | IT, Operations, Legal, AI Engineer, Data Engineer |
+| Internal staff time (Phase 1–4) | EUR 38,200 | EUR 68,200 | IT, Operations, Legal, AI Engineer, Data Engineer, Project lead |
 | Training and change management | EUR 3,000 | EUR 8,000 | Half-day sessions across pilot locations |
 | Legal / DPA review | EUR 2,000 | EUR 6,000 | GDPR + POPIA review; external legal if needed |
-| Contingency (30%) | EUR 19,000 | EUR 52,000 | Per Gartner AI project overrun guidance |
-| **Total Year 1** | **EUR 82,000** | **EUR 226,000** | |
+| Contingency (30%) | EUR 22,000 | EUR 57,000 | Per Gartner AI project overrun guidance |
+| **Total Year 1** | **EUR 95,200** | **EUR 239,200** | |
 | **Ongoing annual (Year 2+)** | **EUR 20,000** | **EUR 65,000** | Platform licence + maintenance only |
 
 ---
@@ -66,7 +66,8 @@ At EUR 0.10–0.20 per document, monthly platform cost ranges from EUR 40–300/
 | Customs declarants (training + parallel run) | — | 6 per declarant × 3 | EUR 250/day | EUR 4,500 |
 | AI Engineer | 10 | 15 | EUR 600/day | EUR 15,000 |
 | Data Engineer | 8 | 10 | EUR 550/day | EUR 9,900 |
-| **Total internal time cost** | | | | **EUR 44,600** |
+| Project lead / AI consultant | 8 | 14 | EUR 600/day | EUR 13,200 |
+| **Total internal time cost** | | | | **EUR 57,800** |
 
 ---
 
@@ -78,7 +79,7 @@ At EUR 0.10–0.20 per document, monthly platform cost ranges from EUR 40–300/
 - AI cost per document: EUR 3 (midpoint of EUR 2–3 range)
 - Error rate reduction: from 11.5% to 5% (conservative — not full benchmark)
 - Cost per error (customs hold + rework): EUR 500 average (conservative)
-- Payback calculation based on Year 1 total cost: EUR 120,000 (midpoint)
+- Payback calculation based on Year 1 total cost: EUR 160,000 (midpoint)
 
 ### Monthly savings calculation
 
@@ -92,19 +93,19 @@ At EUR 0.10–0.20 per document, monthly platform cost ranges from EUR 40–300/
 
 | Total Year 1 cost | Monthly saving | Payback period |
 |---|---|---|
-| EUR 82,000 (low) | EUR 9,150 | ~9 months |
-| EUR 145,000 (midpoint) | EUR 9,150 | ~16 months |
-| EUR 226,000 (high) | EUR 9,150 | ~25 months |
+| EUR 95,200 (low) | EUR 9,150 | ~10 months |
+| EUR 160,000 (midpoint) | EUR 9,150 | ~17 months |
+| EUR 239,200 (high) | EUR 9,150 | ~26 months |
 
 **Note:** These are conservative pilot-corridor estimates. Full network rollout multiplies the monthly saving by the number of corridors (8 countries) while implementation costs do not scale linearly — platform cost increases modestly, but integration and training costs are largely fixed after Phase 4.
 
 ### Year 1 ROI at midpoint scenario
-- Total cost: EUR 145,000
+- Total cost: EUR 160,000
 - Total annual saving: EUR 9,150 × 12 = EUR 109,800
-- Net Year 1 position: −EUR 35,200
+- Net Year 1 position: −EUR 50,200
 - Year 2 annual saving: EUR 109,800 (platform cost only ~EUR 35,000)
 - **Year 2 net return: ~EUR 75,000**
-- **3-year cumulative return: ~EUR 115,000 net of all costs**
+- **3-year cumulative return: ~EUR 100,000 net of all costs**
 
 ---
 
@@ -114,8 +115,8 @@ Present three scenarios to Olaf:
 
 | Scenario | Total Year 1 | Description |
 |---|---|---|
-| Conservative | EUR 82,000–100,000 | Direct API integration; single vendor SaaS; internal team handles most configuration |
-| Base case | EUR 130,000–160,000 | Medium integration complexity; vendor-supported implementation; full legal review |
-| High complexity | EUR 180,000–226,000 | Custom TMS integration; scanning infrastructure required; multi-vendor assessment |
+| Conservative | EUR 95,000–115,000 | Direct API integration; single vendor SaaS; internal team handles most configuration |
+| Base case | EUR 145,000–175,000 | Medium integration complexity; vendor-supported implementation; full legal review |
+| High complexity | EUR 195,000–240,000 | Custom TMS integration; scanning infrastructure required; multi-vendor assessment |
 
-**Recommendation:** Budget for the base case (EUR 130,000–160,000) with the conservative scenario as the floor and high complexity as the ceiling. Present to Olaf as a range with the integration assessment in Phase 1 as the key narrowing event.
+**Recommendation:** Budget for the base case (EUR 145,000–175,000) with the conservative scenario as the floor and high complexity as the ceiling. Present to Olaf as a range with the integration assessment in Phase 1 as the key narrowing event.
