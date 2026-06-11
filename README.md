@@ -221,7 +221,7 @@ The dashboard is the presentation layer of a complete project. Each implementati
 |---|---|---|
 | `README.md` | root | This file — project overview and documentation index |
 | `requirements.txt` | root | Python dependencies for `process_datasets.py` |
-| `Dashboard_ai_opportunity_v2.twb` | `presentation/` | Tableau workbook — 9-panel executive presentation |
+| `Dashboard_ai_opportunity_v2.twbx` | `presentation/` | Tableau workbook — 9-panel executive presentation |
 | `dashboard_documentation.md` | `dashboard/` | Full dashboard technical documentation |
 | `benchmarks.xlsx` | `data/processed/` | Primary data source — all panels |
 | `company_cases.xlsx` | `data/processed/` | Operator case studies — Panel 4b |
