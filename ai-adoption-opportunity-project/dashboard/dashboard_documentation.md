@@ -29,7 +29,7 @@ AI is introduced as the answer to a problem already established. Panel 4 resolve
 | 1.2 | Not all corridors carry the same risk | Problem |
 | 2 | Three error types — three consequences | Problem |
 | 3.1 | Each error compounds into a chain of business cost | Problem |
-| 3.2 | Business costs are increased by each error | Problem |
+| 3.2 | Business impact when adopting AI | Transition to AI |
 | 4.1 | AI eliminates each error type at source | Solution |
 | 4.2 | What this produces — before and after | Solution |
 | 5 | The financial return — and why timing matters | Solution |
@@ -149,7 +149,7 @@ Bar chart — Manual (45 days, grey) vs AI (12 days, green).
 **Note:** AP cycle time refers to accounts payable cycle time, meaning the number of days from receiving an invoice to completing its processing and approval for payment.
 
 **`Business Impact`**
-Bar chart — three amber bars showing potential impact of AI adoption: logistics cost reduction (15%), margin improvement (52.5%), service level improvement (65%).
+Bar chart — three green bars showing potential impact of AI adoption: logistics cost reduction (15%), margin improvement (52.5%), service level improvement (65%).
 - *What it means:* Aggregate impact metrics from early AI adopters in logistics, sourced from McKinsey, StartUs Insights, and the European Logistics Association.
 - *Why it matters:* These are the consequence metrics — what happens to the business when the error cascade is stopped. They frame the financial stakes before the ROI panel.
 - *Source:* McKinsey / StartUs Insights / European Logistics Association 2025
