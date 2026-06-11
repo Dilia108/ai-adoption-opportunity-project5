@@ -330,7 +330,7 @@ The workbook locale is set to **English (United States)** to ensure decimal sepa
 **What to capture:** Full panel showing the five-step cascade (Document Error → Customs Hold → Missed Delivery Window → Expedite Shipment → Margin Erosion).
 **Key visual:** The downward arrows connecting each step; the red borders on steps 1 and 5.
 **Screenshot 3.1:** ![screenshot_panel3.1_cost_chain](screenshots/image-3.png)
-**Screenshot 3.2:** ![screenshot_panel3.2_transition_to_AI](image-4.png)
+**Screenshot 3.2:** ![screenshot_panel3.2_transition_to_AI](screenshots/image-4.png)
 
 ---
 
